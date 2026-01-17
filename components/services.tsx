@@ -105,9 +105,8 @@ const Services = () => {
               ref={(el) => {
                 cardRefs.current[index] = el
               }}
-              className={`transition-all duration-1000 ${
-                visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-              }`}
+              className={`transition-all duration-1000 ${visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
               style={{
                 transitionDelay: `${index * 150}ms`,
                 perspective: "1000px",
@@ -127,7 +126,8 @@ const Services = () => {
                     <h3 className="text-xl font-bold mb-3 transition-colors duration-300 hover:text-blue-600 line-reveal">
                       {service.title}
                     </h3>
-                    <p className="text-gray-700 leading-relaxed font-light">{service.description}</p>
+                    {/* 【改善箇所】色をtext-gray-900（真っ黒に近いグレー）にし、太さをfont-normalに強化 */}
+                    <p className="text-gray-900 leading-relaxed font-normal">{service.description}</p>
                   </div>
                 </LevitatingCard>
               </Link>

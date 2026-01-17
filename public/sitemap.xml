@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>https://meraboco.jp/</loc>
+    <xhtml:link rel="alternate" hreflang="ja" href="https://meraboco.jp/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://meraboco.jp/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://meraboco.jp/"/>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://meraboco.jp/assets/logo.png</image:loc>
+      <image:title>メラボコ - 東京のWEB制作会社</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Company Page -->
+  <url>
+    <loc>https://meraboco.jp/company</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Services Page -->
+  <url>
+    <loc>https://meraboco.jp/services</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Service Detail Pages -->
+  <url>
+    <loc>https://meraboco.jp/services/web-production</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://meraboco.jp/services/web-production-workspace.jpg</image:loc>
+      <image:title>WEB制作サービス</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/services/system-development</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://meraboco.jp/services/system-development-programming.jpg</image:loc>
+      <image:title>システム開発サービス</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/services/ux-ui-design</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://meraboco.jp/services/ux-ui-design-process.jpg</image:loc>
+      <image:title>UX/UIデザインサービス</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/services/digital-marketing</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://meraboco.jp/services/digital-marketing-analytics.jpg</image:loc>
+      <image:title>デジタルマーケティングサービス</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/services/consulting</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://meraboco.jp/services/it-consulting-meeting.jpg</image:loc>
+      <image:title>ITコンサルティングサービス</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/services/maintenance</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://meraboco.jp/services/website-maintenance-monitoring.jpg</image:loc>
+      <image:title>保守・運用サービス</image:title>
+    </image:image>
+  </url>
+  
+  <!-- Works Page -->
+  <url>
+    <loc>https://meraboco.jp/works</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  
+  <!-- Work Detail Pages -->
+  <url>
+    <loc>https://meraboco.jp/works/hotel-shiro</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://meraboco.jp/hotel-shiro-website-preview.jpg</image:loc>
+      <image:title>ホテルS社 公式Webサイト制作</image:title>
+    </image:image>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/works/corporate-renewal</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/works/hotel-booking</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/works/restaurant-ec</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/works/clinic-crm</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/works/fashion-brand</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/works/school-lms</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://meraboco.jp/privacy</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+  <url>
+    <loc>https://meraboco.jp/terms</loc>
+    <lastmod>2026-01-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  
+</urlset>

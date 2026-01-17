@@ -1,0 +1,48 @@
+# Robots.txt for meraboco.jp
+# SEO Optimized
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://meraboco.jp/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Disallow API routes
+User-agent: *
+Disallow: /api/
+
+# Disallow admin pages (if any)
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/
+
+# Allow important resources
+Allow: /assets/
+Allow: /services/
+Allow: /*.js$
+Allow: /*.css$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+Allow: /*.svg$
+
+# Host
+Host: https://meraboco.jp

@@ -1,0 +1,121 @@
+# ================================================
+# メラボコ - Xサーバー用 .htaccess
+# SEO・セキュリティ最適化
+# ================================================
+
+# HTTPSリダイレクト（SSL強制）
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# wwwなしに統一
+RewriteCond %{HTTP_HOST} ^www\.meraboco\.jp [NC]
+RewriteRule ^(.*)$ https://meraboco.jp/$1 [L,R=301]
+
+# ================================================
+# セキュリティヘッダー（A+評価対応）
+# ================================================
+
+# HSTS（HTTP Strict Transport Security）- 2年間
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+
+# クリックジャッキング防止
+Header always set X-Frame-Options "DENY"
+
+# MIMEタイプスニッフィング防止
+Header always set X-Content-Type-Options "nosniff"
+
+# XSS保護
+Header always set X-XSS-Protection "1; mode=block"
+
+# リファラーポリシー
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+# パーミッションポリシー
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+# Content Security Policy
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://va.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com; connect-src 'self' https://va.vercel-scripts.com https://*.supabase.co; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests"
+
+# Cross-Origin設定
+Header always set Cross-Origin-Opener-Policy "same-origin"
+Header always set Cross-Origin-Resource-Policy "same-origin"
+
+# X-Powered-By削除
+Header always unset X-Powered-By
+
+# ================================================
+# キャッシュ設定（Core Web Vitals向上）
+# ================================================
+
+# 画像ファイル（1年キャッシュ）
+<FilesMatch "\.(ico|png|jpg|jpeg|gif|webp|avif|svg)$">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+
+# フォントファイル（1年キャッシュ）
+<FilesMatch "\.(woff|woff2|ttf|otf|eot)$">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+
+# CSS/JSファイル（1年キャッシュ）
+<FilesMatch "\.(css|js)$">
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</FilesMatch>
+
+# HTMLファイル（キャッシュなし、常に最新）
+<FilesMatch "\.(html|htm)$">
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+  Header set Pragma "no-cache"
+  Header set Expires "0"
+</FilesMatch>
+
+# ================================================
+# Gzip圧縮
+# ================================================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ================================================
+# エラーページ
+# ================================================
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html
+
+# ================================================
+# ファイルアクセス制限
+# ================================================
+
+# .htaccess自体へのアクセス禁止
+<Files .htaccess>
+  Order allow,deny
+  Deny from all
+</Files>
+
+# 環境変数ファイルへのアクセス禁止
+<Files .env>
+  Order allow,deny
+  Deny from all
+</Files>
+
+<Files .env.local>
+  Order allow,deny
+  Deny from all
+</Files>
+
+# ================================================
+# ディレクトリリスティング無効化
+# ================================================
+Options -Indexes
+
+# ================================================
+# ETags無効化（キャッシュの一貫性）
+# ================================================
+FileETag None

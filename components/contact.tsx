@@ -92,121 +92,122 @@ export default function Contact() {
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
                 <h3 className="text-xl font-bold text-white mb-6">{t("contact.phoneLabel")}</h3>
 
-                href={`tel:${t("contact.phone")}`}
-                className="text-3xl font-bold text-blue-400 hover:text-blue-300 transition-colors"
+                <a
+                  href={`tel:${t("contact.phone")}`}
+                  className="text-3xl font-bold text-blue-400 hover:text-blue-300 transition-colors"
                 >
-                {t("contact.phone")}
-              </a>
-              <p className="text-gray-400 mt-4 text-sm">{t("contact.aiNotice")}</p>
-          </div>
-
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-            <h3 className="text-xl font-bold text-white mb-4">営業時間</h3>
-            <p className="text-gray-300">平日 9:00 - 18:00</p>
-            <p className="text-gray-400 text-sm mt-2">土日祝日はお休みをいただいております</p>
-          </div>
-        </motion.div>
-
-        {/* Contact Form */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <label htmlFor="name" className="block text-white font-medium mb-2">
-                {t("contact.form.name")} <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder={t("contact.form.namePlaceholder")}
-                required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-white font-medium mb-2">
-                {t("contact.form.email")} <span className="text-red-400">*</span>
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder={t("contact.form.emailPlaceholder")}
-                required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-white font-medium mb-2">
-                {t("contact.form.message")} <span className="text-red-400">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder={t("contact.form.messagePlaceholder")}
-                required
-                rows={6}
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors resize-none"
-              />
-            </div>
-
-            {/* Privacy Policy Checkbox */}
-            <div className="flex items-start gap-3">
-              <input
-                type="checkbox"
-                id="privacy"
-                checked={privacyAgreed}
-                onChange={(e) => setPrivacyAgreed(e.target.checked)}
-                className="mt-1 w-5 h-5 rounded border-white/20 bg-white/10 text-blue-500 focus:ring-blue-400 focus:ring-offset-0 cursor-pointer"
-              />
-              <label htmlFor="privacy" className="text-gray-300 text-sm cursor-pointer">
-                <Link href="/privacy" className="text-blue-400 hover:text-blue-300 underline" target="_blank">
-                  プライバシーポリシー
-                </Link>
-                に同意する <span className="text-red-400">*</span>
-              </label>
-            </div>
-
-            {/* Status Messages */}
-            {status === "success" && (
-              <div className="bg-green-500/20 border border-green-500/50 rounded-lg p-4 text-green-300">
-                {t("contact.form.success")}
+                  {t("contact.phone")}
+                </a>
+                <p className="text-gray-400 mt-4 text-sm">{t("contact.aiNotice")}</p>
               </div>
-            )}
 
-            {status === "error" && (
-              <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 text-red-300">
-                {errorMessage || t("contact.form.error")}
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                <h3 className="text-xl font-bold text-white mb-4">営業時間</h3>
+                <p className="text-gray-300">平日 9:00 - 18:00</p>
+                <p className="text-gray-400 text-sm mt-2">土日祝日はお休みをいただいております</p>
               </div>
-            )}
+            </motion.div>
 
-            <button
-              type="submit"
-              disabled={status === "loading" || !privacyAgreed}
-              className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${status === "loading" || !privacyAgreed
-                  ? "bg-gray-500 cursor-not-allowed text-gray-300"
-                  : "bg-blue-600 hover:bg-blue-700 text-white"
-                }`}
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
             >
-              {status === "loading" ? t("contact.form.sending") : t("contact.form.submit")}
-            </button>
-          </form>
-        </motion.div>
-      </div>
-    </div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-white font-medium mb-2">
+                    {t("contact.form.name")} <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder={t("contact.form.namePlaceholder")}
+                    required
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="block text-white font-medium mb-2">
+                    {t("contact.form.email")} <span className="text-red-400">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder={t("contact.form.emailPlaceholder")}
+                    required
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-white font-medium mb-2">
+                    {t("contact.form.message")} <span className="text-red-400">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder={t("contact.form.messagePlaceholder")}
+                    required
+                    rows={6}
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors resize-none"
+                  />
+                </div>
+
+                {/* Privacy Policy Checkbox */}
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    id="privacy"
+                    checked={privacyAgreed}
+                    onChange={(e) => setPrivacyAgreed(e.target.checked)}
+                    className="mt-1 w-5 h-5 rounded border-white/20 bg-white/10 text-blue-500 focus:ring-blue-400 focus:ring-offset-0 cursor-pointer"
+                  />
+                  <label htmlFor="privacy" className="text-gray-300 text-sm cursor-pointer">
+                    <Link href="/privacy" className="text-blue-400 hover:text-blue-300 underline" target="_blank">
+                      プライバシーポリシー
+                    </Link>
+                    に同意する <span className="text-red-400">*</span>
+                  </label>
+                </div>
+
+                {/* Status Messages */}
+                {status === "success" && (
+                  <div className="bg-green-500/20 border border-green-500/50 rounded-lg p-4 text-green-300">
+                    {t("contact.form.success")}
+                  </div>
+                )}
+
+                {status === "error" && (
+                  <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 text-red-300">
+                    {errorMessage || t("contact.form.error")}
+                  </div>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={status === "loading" || !privacyAgreed}
+                  className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${status === "loading" || !privacyAgreed
+                    ? "bg-gray-500 cursor-not-allowed text-gray-300"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                    }`}
+                >
+                  {status === "loading" ? t("contact.form.sending") : t("contact.form.submit")}
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        </div>
       </div >
     </section >
   )

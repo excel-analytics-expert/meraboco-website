@@ -12,7 +12,6 @@ import FireflyParticles from "@/components/firefly-particles"
 import "./globals.css"
 import { LanguageProvider } from "@/contexts/language-context"
 
-// フォント最適化（preload有効）
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   variable: "--font-noto-sans-jp",
@@ -34,7 +33,6 @@ const notoSerifJP = Noto_Serif_JP({
   preload: true,
 })
 
-// Viewport設定（モバイル最適化）
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -46,7 +44,6 @@ export const viewport: Viewport = {
   ],
 }
 
-// メタデータ（SEO完全対応）
 export const metadata: Metadata = {
   metadataBase: new URL("https://meraboco.jp"),
   title: {
@@ -138,7 +135,7 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   verification: {
-    google: "your-google-site-verification-code",
+    google: "L-1Y42OSYyE1tjN6DqNnRY6qLVZuwYbWcxyJPHjF5h4",
   },
   alternates: {
     canonical: "https://meraboco.jp/",
@@ -151,11 +148,9 @@ export const metadata: Metadata = {
   classification: "Business",
 }
 
-// 構造化データ（JSON-LD）
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
-    // Organization
     {
       "@type": "Organization",
       "@id": "https://meraboco.jp/#organization",
@@ -194,7 +189,6 @@ const structuredData = {
       foundingDate: "2024",
       slogan: "デジタルで、新しい前例をつくっていく。",
     },
-    // WebSite
     {
       "@type": "WebSite",
       "@id": "https://meraboco.jp/#website",
@@ -216,7 +210,6 @@ const structuredData = {
         "query-input": "required name=search_term_string",
       },
     },
-    // WebPage
     {
       "@type": "WebPage",
       "@id": "https://meraboco.jp/#webpage",
@@ -243,7 +236,6 @@ const structuredData = {
         ],
       },
     },
-    // ProfessionalService
     {
       "@type": "ProfessionalService",
       "@id": "https://meraboco.jp/#service",
@@ -287,7 +279,6 @@ const structuredData = {
         worstRating: "1",
       },
     },
-    // FAQ（AEO対応）
     {
       "@type": "FAQPage",
       "@id": "https://meraboco.jp/#faq",
@@ -345,32 +336,27 @@ export default function RootLayout({
   return (
     <html lang="ja" className="scroll-smooth">
       <head>
-        {/* 構造化データ */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        
-        {/* Canonical & Alternate */}
+
         <link rel="canonical" href="https://meraboco.jp/" />
         <link rel="alternate" hrefLang="ja" href="https://meraboco.jp/" />
         <link rel="alternate" hrefLang="en" href="https://meraboco.jp/?lang=en" />
         <link rel="alternate" hrefLang="x-default" href="https://meraboco.jp/" />
-        
-        {/* PWA */}
+
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="メラボコ" />
-        
-        {/* Preconnect for performance */}
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
         <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
-        
-        {/* Font Awesome */}
+
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -380,22 +366,17 @@ export default function RootLayout({
         className={`${notoSansJP.variable} ${inter.variable} ${notoSerifJP.variable} font-sans antialiased`}
       >
         <LanguageProvider>
-          {/* 背景エフェクト */}
           <NatureBackground />
           <MatrixRainBackground />
           <DigitalGridOverlay />
           <FireflyParticles />
-          
-          {/* カーソルエフェクト（デスクトップのみ） */}
+
           <CursorFollower />
-          
-          {/* スクロールトップボタン */}
+
           <ScrollToTop />
-          
-          {/* ページトランジション */}
+
           <PageTransition>{children}</PageTransition>
-          
-          {/* Analytics */}
+
           <Analytics />
         </LanguageProvider>
       </body>

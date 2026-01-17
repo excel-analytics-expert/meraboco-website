@@ -208,7 +208,7 @@ export default function Contact() {
             </motion.div>
           </div>
         </div>
-      </div >
-    </section >
+      </div>
+    </section>
   )
 }

@@ -51,28 +51,20 @@ export const metadata: Metadata = {
     template: "%s | メラボコ - 東京のWEB制作会社",
   },
   description:
-    "東京・港区北青山のWEB制作コンサルタント『メラボコ』。企業サイト制作、WEBシステム開発、UX/UIデザイン、デジタルマーケティングをワンストップで提供。中小企業・ホテル・店舗の集客とDXを支援します。無料相談受付中。",
+    "東京・港区北青山のWEB制作コンサルタント『メラボコ』。Next.jsやAI技術（AEO）を活用した企業サイト制作、WEBシステム開発、UX/UIデザインをワンストップで提供。中小企業の集客とDXを支援します。",
   keywords: [
     "WEB制作",
     "WEB制作会社",
     "ホームページ制作",
-    "ホームページ制作会社",
     "システム開発",
-    "WEBシステム開発",
     "UXデザイン",
-    "UIデザイン",
+    "AEO対策",
+    "SEO対策",
+    "Next.js",
+    "Supabase",
     "東京",
     "港区",
-    "北青山",
-    "中小企業",
     "DX支援",
-    "デジタルマーケティング",
-    "レスポンシブデザイン",
-    "SEO対策",
-    "ECサイト制作",
-    "コーポレートサイト",
-    "ランディングページ",
-    "LP制作",
   ],
   authors: [{ name: "メラボコ", url: "https://meraboco.jp" }],
   creator: "s.kenichi",
@@ -85,7 +77,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "メラボコ | 東京のWEB制作・システム開発・UXデザイン会社",
     description:
-      "最新のWEB技術とデザインで、成果に直結するWEBサイトとシステムを構築。無料相談受付中。",
+      "最新のWEB技術とデザインで、成果に直結するWEBサイトとシステムを構築。AI回答エンジン（AEO）に最適化されたモダンな開発を提供します。",
     type: "website",
     url: "https://meraboco.jp/",
     siteName: "メラボコ",
@@ -105,35 +97,21 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "メラボコ | 東京のWEB制作・システム開発・UXデザイン会社",
     description:
-      "企業サイト制作、システム開発、UX/UIデザインをワンストップで提供。無料相談受付中。",
+      "企業サイト制作、システム開発、UX/UIデザインをワンストップで提供。AI時代に選ばれるWEB戦略を。",
     images: ["/assets/logo.png"],
     creator: "@meraboco",
   },
   robots: {
     index: true,
     follow: true,
-    nocache: false,
     googleBot: {
       index: true,
       follow: true,
-      noimageindex: false,
       "max-video-preview": -1,
       "max-image-preview": "large",
       "max-snippet": -1,
     },
   },
-  icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "48x48" },
-      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
-    ],
-    apple: [
-      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
-    ],
-    shortcut: "/favicon.ico",
-  },
-  manifest: "/site.webmanifest",
   verification: {
     google: "L-1Y42OSYyE1tjN6DqNnRY6qLVZuwYbWcxyJPHjF5h4",
   },
@@ -144,10 +122,9 @@ export const metadata: Metadata = {
       "en-US": "https://meraboco.jp/?lang=en",
     },
   },
-  category: "technology",
-  classification: "Business",
 }
 
+// AEO(AI Engine Optimization)を強化した構造化データ
 const structuredData = {
   "@context": "https://schema.org",
   "@graph": [
@@ -159,11 +136,8 @@ const structuredData = {
       logo: {
         "@type": "ImageObject",
         url: "https://meraboco.jp/assets/logo.png",
-        width: 250,
-        height: 60,
       },
-      description:
-        "東京・港区北青山のWEB制作コンサルタント。企業サイト制作、システム開発、UX/UIデザインをワンストップで提供。",
+      description: "東京・港区北青山のWEB制作コンサルタント。Next.jsを用いた高性能なサイト制作とDX支援。",
       email: "meraboco.2025.8@gmail.com",
       telephone: "050-1793-1290",
       address: {
@@ -174,74 +148,22 @@ const structuredData = {
         postalCode: "107-0061",
         addressCountry: "JP",
       },
-      areaServed: {
-        "@type": "Country",
-        name: "日本",
-      },
-      knowsAbout: [
-        "Web Development",
-        "System Development",
-        "UX Design",
-        "UI Design",
-        "Digital Marketing",
-        "SEO",
-      ],
+      knowsAbout: ["Web Development", "AEO", "SEO", "UX Design", "Next.js", "Supabase"],
       foundingDate: "2024",
-      slogan: "デジタルで、新しい前例をつくっていく。",
     },
     {
       "@type": "WebSite",
       "@id": "https://meraboco.jp/#website",
       url: "https://meraboco.jp/",
       name: "メラボコ",
-      description:
-        "東京のWEB制作・システム開発・UXデザイン。中小企業のデジタル変革を支援。",
-      publisher: {
-        "@id": "https://meraboco.jp/#organization",
-      },
+      publisher: { "@id": "https://meraboco.jp/#organization" },
       inLanguage: ["ja", "en"],
-      potentialAction: {
-        "@type": "SearchAction",
-        target: {
-          "@type": "EntryPoint",
-          urlTemplate:
-            "https://meraboco.jp/?s={search_term_string}",
-        },
-        "query-input": "required name=search_term_string",
-      },
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://meraboco.jp/#webpage",
-      url: "https://meraboco.jp/",
-      name: "メラボコ | 東京のWEB制作・システム開発・UXデザイン会社",
-      isPartOf: {
-        "@id": "https://meraboco.jp/#website",
-      },
-      about: {
-        "@id": "https://meraboco.jp/#organization",
-      },
-      description:
-        "東京・港区北青山のWEB制作コンサルタント『メラボコ』。企業サイト制作、システム開発、UX/UIデザインをワンストップで提供。",
-      inLanguage: "ja",
-      breadcrumb: {
-        "@type": "BreadcrumbList",
-        itemListElement: [
-          {
-            "@type": "ListItem",
-            position: 1,
-            name: "ホーム",
-            item: "https://meraboco.jp/",
-          },
-        ],
-      },
     },
     {
       "@type": "ProfessionalService",
       "@id": "https://meraboco.jp/#service",
-      name: "メラボコ",
+      name: "メラボコ WEBコンサルティング",
       image: "https://meraboco.jp/assets/logo.png",
-      priceRange: "$$",
       address: {
         "@type": "PostalAddress",
         streetAddress: "北青山1-3-3",
@@ -250,34 +172,8 @@ const structuredData = {
         postalCode: "107-0061",
         addressCountry: "JP",
       },
-      geo: {
-        "@type": "GeoCoordinates",
-        latitude: 35.6656,
-        longitude: 139.72,
-      },
-      url: "https://meraboco.jp/",
+      priceRange: "¥150,000 - ¥2,000,000",
       telephone: "050-1793-1290",
-      openingHoursSpecification: [
-        {
-          "@type": "OpeningHoursSpecification",
-          dayOfWeek: [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-          ],
-          opens: "09:00",
-          closes: "18:00",
-        },
-      ],
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5",
-        reviewCount: "10",
-        bestRating: "5",
-        worstRating: "1",
-      },
     },
     {
       "@type": "FAQPage",
@@ -285,42 +181,18 @@ const structuredData = {
       mainEntity: [
         {
           "@type": "Question",
-          name: "メラボコとはどのようなサービスですか？",
+          name: "メラボコの特徴は何ですか？",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "メラボコは東京・港区北青山に拠点を置くWEB制作コンサルタントです。企業サイト制作、システム開発、UX/UIデザイン、デジタルマーケティングをワンストップで提供し、中小企業のデジタル変革を支援しています。",
+            text: "最新のNext.js技術とAI回答エンジン最適化（AEO）を組み合わせ、高速かつ検索に強いWebサイト制作を提供することです。",
           },
         },
         {
           "@type": "Question",
-          name: "WEBサイト制作の料金はいくらですか？",
+          name: "対応エリアはどこですか？",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "ライトプラン（LP制作：15万円〜）、スタンダードプラン（コーポレートサイト：35万円〜）、プレミアムプラン（ブランディング：80万円〜）の3つのプランを用意しています。お客様のニーズに応じて最適なプランをご提案します。",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "制作期間はどのくらいかかりますか？",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "プロジェクトの規模により異なりますが、LP制作で2-3週間、コーポレートサイトで1-2ヶ月、大規模システム開発で3-6ヶ月程度が目安です。詳細はお問い合わせください。",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "どのような企業がメラボコを利用していますか？",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "製造業、ホテル業、飲食店、クリニック、ファッションブランド、教育機関など、幅広い業種の企業様にご利用いただいています。特に中小企業のデジタル化支援に強みを持っています。",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "保守・運用サポートはありますか？",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "はい、Webサイト公開後の保守・運用サポートも提供しています。定期的なセキュリティアップデート、コンテンツ更新、システム監視などを行い、安定した運用をサポートします。",
+            text: "東京・港区を拠点としていますが、オンラインにて全国対応可能です。",
           },
         },
       ],
@@ -334,29 +206,15 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="ja" className="scroll-smooth">
+    <html lang="ja" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-
-        <link rel="canonical" href="https://meraboco.jp/" />
-        <link rel="alternate" hrefLang="ja" href="https://meraboco.jp/" />
-        <link rel="alternate" hrefLang="en" href="https://meraboco.jp/?lang=en" />
-        <link rel="alternate" hrefLang="x-default" href="https://meraboco.jp/" />
-
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="メラボコ" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-        <link rel="dns-prefetch" href="https://va.vercel-scripts.com" />
-
+        <link rel="icon" href="/favicon.ico" sizes="48x48" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        {/* Font Awesome 読み込み維持 */}
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -366,15 +224,17 @@ export default function RootLayout({
         className={`${notoSansJP.variable} ${inter.variable} ${notoSerifJP.variable} font-sans antialiased`}
       >
         <LanguageProvider>
+          {/* 背景コンポーネント群を維持 */}
           <NatureBackground />
           <MatrixRainBackground />
           <DigitalGridOverlay />
           <FireflyParticles />
 
+          {/* インタラクション要素を維持 */}
           <CursorFollower />
-
           <ScrollToTop />
 
+          {/* メインコンテンツ */}
           <PageTransition>{children}</PageTransition>
 
           <Analytics />

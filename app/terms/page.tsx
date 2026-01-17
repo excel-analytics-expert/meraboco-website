@@ -27,7 +27,8 @@ export default function TermsPage() {
 
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto prose prose-lg">
+            {/* 変更点: bg-white/90 を bg-white/80 に変更 */}
+            <div className="max-w-4xl mx-auto prose prose-lg bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
               <h2 className="text-3xl font-bold mb-6">第1条（適用）</h2>
               <p className="leading-relaxed mb-8">
                 本規約は、当社が提供するすべてのサービス（以下「本サービス」）の利用に関する条件を、本サービスを利用するお客様（以下「利用者」）と当社との間で定めるものです。利用者は、本規約に同意したうえで、本サービスを利用するものとします。

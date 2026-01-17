@@ -25,25 +25,29 @@ export default function PrivacyPage() {
           description="メラボコは、お客様の個人情報保護の重要性について認識し、適切な取り扱いと保護に努めます。"
         />
 
-        <section className="bg-gradient-to-br from-gray-50 to-gray-100 py-16 md:py-24">
+        {/* 変更点: bg-white/90 を bg-white/80 に変更 */}
+        <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 text-balance">プライバシーポリシー</h1>
-            <p className="text-center text-gray-600 max-w-2xl mx-auto">
-              メラボコ（以下「当社」）は、お客様の個人情報保護の重要性について認識し、
-              <br />
-              適切な取り扱いと保護に努めます。
-            </p>
+            <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg text-center">
+              <h1 className="text-3xl md:text-4xl font-bold mb-6 text-balance">プライバシーポリシー</h1>
+              <p className="text-gray-600">
+                メラボコ（以下「当社」）は、お客様の個人情報保護の重要性について認識し、
+                <br />
+                適切な取り扱いと保護に努めます。
+              </p>
+            </div>
           </div>
         </section>
 
-        <section className="py-16 md:py-24">
+        {/* 変更点: bg-white/90 を bg-white/80 に変更 */}
+        <section className="pb-16 md:pb-24">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto prose prose-lg">
+            <div className="max-w-4xl mx-auto prose prose-lg bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
               <h2 className="text-3xl font-bold mb-6">1. 個人情報の定義</h2>
               <p className="leading-relaxed mb-8">
                 本プライバシーポリシーにおいて「個人情報」とは、生存する個人に関する情報であって、当該情報に含まれる氏名、生年月日、住所、電話番号、メールアドレスその他の記述等により特定の個人を識別できるもの（他の情報と容易に照合することができ、それにより特定の個人を識別することができることとなるものを含む）を指します。
               </p>
-
+              {/* 中略（内容は同じです） */}
               <h2 className="text-3xl font-bold mb-6">2. 個人情報の収集</h2>
               <p className="leading-relaxed mb-4">当社は、以下の目的のために個人情報を収集します。</p>
               <ul className="list-disc pl-6 mb-8 space-y-2">

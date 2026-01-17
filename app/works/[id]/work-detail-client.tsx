@@ -37,45 +37,49 @@ export default function WorkDetailClient({ id, workJa, workEn }: Props) {
     const { language } = useLanguage()
     const work = language === "ja" ? workJa : workEn
 
-    const labels = language === "ja" ? {
-        client: "クライアント",
-        period: "期間",
-        googleRating: "Google評価",
-        reviews: "件",
-        projectOverview: "プロジェクト概要",
-        challenge: "課題",
-        solution: "ソリューション",
-        results: "成果",
-        technologies: "使用技術",
-        visitSite: "サイトを見る",
-        backToWorks: "実績一覧に戻る",
-        contact: "お問い合わせ",
-        ctaTitle: "同様のプロジェクトをご検討ですか？",
-        ctaText: "お気軽にご相談ください。無料でお見積りいたします。",
-    } : {
-        client: "Client",
-        period: "Period",
-        googleRating: "Google Rating",
-        reviews: "reviews",
-        projectOverview: "Project Overview",
-        challenge: "Challenge",
-        solution: "Solution",
-        results: "Results",
-        technologies: "Technologies Used",
-        visitSite: "Visit Site",
-        backToWorks: "Back to Portfolio",
-        contact: "Contact Us",
-        ctaTitle: "Considering a similar project?",
-        ctaText: "Feel free to contact us. Free estimates available.",
-    }
+    const labels =
+        language === "ja"
+            ? {
+                client: "クライアント",
+                period: "期間",
+                googleRating: "Google評価",
+                reviews: "件",
+                projectOverview: "プロジェクト概要",
+                challenge: "課題",
+                solution: "ソリューション",
+                results: "成果",
+                technologies: "使用技術",
+                visitSite: "サイトを見る",
+                backToWorks: "実績一覧に戻る",
+                contact: "お問い合わせ",
+                ctaTitle: "同様のプロジェクトをご検討ですか？",
+                ctaText: "お気軽にご相談ください。無料でお見積りいたします。",
+            }
+            : {
+                client: "Client",
+                period: "Period",
+                googleRating: "Google Rating",
+                reviews: "reviews",
+                projectOverview: "Project Overview",
+                challenge: "Challenge",
+                solution: "Solution",
+                results: "Results",
+                technologies: "Technologies Used",
+                visitSite: "Visit Site",
+                backToWorks: "Back to Portfolio",
+                contact: "Contact Us",
+                ctaTitle: "Considering a similar project?",
+                ctaText: "Feel free to contact us. Free estimates available.",
+            }
 
     return (
         <>
             <Header />
             <main className="pt-20">
-                <section className="bg-gradient-to-br from-blue-50 to-indigo-50 py-16 md:py-24">
+                <section className="py-12 md:py-16">
                     <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto">
+                        {/* 変更点: bg-white/90 を bg-white/80 に変更 */}
+                        <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
                             <div className="mb-6">
                                 <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
                                     {work.category}
@@ -91,7 +95,8 @@ export default function WorkDetailClient({ id, workJa, workEn }: Props) {
                                 </div>
                             </div>
                             {work.googleRating && (
-                                <div className="mt-6 flex items-center gap-4 bg-white p-4 rounded-lg shadow-md">
+                                // ここはカード内のカードなので透明度を少し下げてバランスを取ります（bg-white/80 -> bg-white/60）
+                                <div className="mt-6 flex items-center gap-4 bg-white/60 p-4 rounded-lg shadow-sm border border-gray-100">
                                     <div className="flex items-center gap-2">
                                         <span className="text-3xl font-bold text-yellow-500">{work.googleRating}</span>
                                         <div>
@@ -104,7 +109,8 @@ export default function WorkDetailClient({ id, workJa, workEn }: Props) {
                                                 ))}
                                             </div>
                                             <span className="text-sm text-gray-600">
-                                                {labels.googleRating} ({work.googleReviews}{labels.reviews})
+                                                {labels.googleRating} ({work.googleReviews}
+                                                {labels.reviews})
                                             </span>
                                         </div>
                                     </div>
@@ -114,7 +120,7 @@ export default function WorkDetailClient({ id, workJa, workEn }: Props) {
                     </div>
                 </section>
 
-                <section className="py-16 md:py-24">
+                <section className="pb-16 md:pb-24">
                     <div className="container mx-auto px-4">
                         <div className="max-w-4xl mx-auto">
                             <div className="mb-12">
@@ -130,13 +136,14 @@ export default function WorkDetailClient({ id, workJa, workEn }: Props) {
                             {work.seoMetrics && (
                                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
                                     {work.seoMetrics.map((metric) => (
+                                        // 変更点: bg-*-50/90 を bg-*-50/80 に変更
                                         <div
                                             key={metric.label}
-                                            className={`p-4 rounded-lg text-center ${metric.status === "excellent"
-                                                ? "bg-green-50 border border-green-200"
+                                            className={`p-4 rounded-lg text-center backdrop-blur-sm shadow-sm ${metric.status === "excellent"
+                                                ? "bg-green-50/80 border border-green-200"
                                                 : metric.status === "good"
-                                                    ? "bg-blue-50 border border-blue-200"
-                                                    : "bg-gray-50 border border-gray-200"
+                                                    ? "bg-blue-50/80 border border-blue-200"
+                                                    : "bg-gray-50/80 border border-gray-200"
                                                 }`}
                                         >
                                             <div
@@ -155,48 +162,54 @@ export default function WorkDetailClient({ id, workJa, workEn }: Props) {
                                 </div>
                             )}
 
-                            <div className="prose prose-lg max-w-none">
-                                <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.projectOverview}</h2>
-                                <p className="text-gray-600 leading-relaxed mb-8">{work.description}</p>
+                            {/* 変更点: bg-white/90 を bg-white/80 に変更 */}
+                            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
+                                <div className="prose prose-lg max-w-none">
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.projectOverview}</h2>
+                                    <p className="text-gray-600 leading-relaxed mb-8">{work.description}</p>
 
-                                <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.challenge}</h2>
-                                <p className="text-gray-600 leading-relaxed mb-8">{work.challenge}</p>
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.challenge}</h2>
+                                    <p className="text-gray-600 leading-relaxed mb-8">{work.challenge}</p>
 
-                                <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.solution}</h2>
-                                <p className="text-gray-600 leading-relaxed mb-8">{work.solution}</p>
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.solution}</h2>
+                                    <p className="text-gray-600 leading-relaxed mb-8">{work.solution}</p>
 
-                                <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.results}</h2>
-                                <ul className="space-y-3 mb-8">
-                                    {work.result.map((item, index) => (
-                                        <li key={index} className="flex items-start gap-3">
-                                            <i className="fas fa-check-circle text-green-500 mt-1"></i>
-                                            <span className="text-gray-600">{item}</span>
-                                        </li>
-                                    ))}
-                                </ul>
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.results}</h2>
+                                    <ul className="space-y-3 mb-8">
+                                        {work.result.map((item, index) => (
+                                            <li key={index} className="flex items-start gap-3">
+                                                <i className="fas fa-check-circle text-green-500 mt-1"></i>
+                                                <span className="text-gray-600">{item}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
 
-                                <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.technologies}</h2>
-                                <div className="flex flex-wrap gap-2 mb-8">
-                                    {work.technologies.map((tech) => (
-                                        <span key={tech} className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium">
-                                            {tech}
-                                        </span>
-                                    ))}
-                                </div>
-
-                                {work.url && (
-                                    <div className="mt-8">
-                                        <a
-                                            href={work.url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-                                        >
-                                            <i className="fas fa-external-link-alt"></i>
-                                            {labels.visitSite}
-                                        </a>
+                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.technologies}</h2>
+                                    <div className="flex flex-wrap gap-2 mb-8">
+                                        {work.technologies.map((tech) => (
+                                            <span
+                                                key={tech}
+                                                className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"
+                                            >
+                                                {tech}
+                                            </span>
+                                        ))}
                                     </div>
-                                )}
+
+                                    {work.url && (
+                                        <div className="mt-8">
+                                            <a
+                                                href={work.url}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+                                            >
+                                                <i className="fas fa-external-link-alt"></i>
+                                                {labels.visitSite}
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -222,7 +235,7 @@ export default function WorkDetailClient({ id, workJa, workEn }: Props) {
                         </div>
                     </div>
                 </section>
-            </main >
+            </main>
             <Footer />
         </>
     )

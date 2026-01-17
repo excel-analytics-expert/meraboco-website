@@ -39,7 +39,13 @@ function validateInput(data: {
   email: string
   company?: string
   message: string
+  privacyAgreed: boolean
 }): { valid: boolean; error?: string } {
+  // Privacy policy agreement validation
+  if (!data.privacyAgreed) {
+    return { valid: false, error: "プライバシーポリシーに同意してください" }
+  }
+
   // Name validation
   if (!data.name || data.name.trim().length < 2) {
     return { valid: false, error: "名前は2文字以上で入力してください" }
@@ -99,9 +105,9 @@ function sanitize(str: string): string {
 export async function POST(request: NextRequest) {
   try {
     // Get IP for rate limiting
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0] || 
-               request.headers.get("x-real-ip") || 
-               "unknown"
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ||
+      request.headers.get("x-real-ip") ||
+      "unknown"
 
     // Check rate limit
     if (!checkRateLimit(ip)) {
@@ -113,10 +119,10 @@ export async function POST(request: NextRequest) {
 
     // Parse request body
     const body = await request.json()
-    const { name, email, company, message } = body
+    const { name, email, company, message, privacyAgreed } = body
 
     // Validate input
-    const validation = validateInput({ name, email, company, message })
+    const validation = validateInput({ name, email, company, message, privacyAgreed })
     if (!validation.valid) {
       return NextResponse.json(
         { error: validation.error },
@@ -154,7 +160,7 @@ export async function POST(request: NextRequest) {
 
     // Send email via Resend
     const { data: emailData, error: emailError } = await resend.emails.send({
-      from: "メラボコ <noreply@meraboco.com>",
+      from: "メラボコ <onboarding@resend.dev>",
       to: ["kenboukulilin@gmail.com"],
       replyTo: sanitizedData.email,
       subject: `【メラボコ】お問い合わせ: ${sanitizedData.name}様`,
@@ -234,7 +240,7 @@ ${sanitizedData.message}
 
     // Send auto-reply to customer
     await resend.emails.send({
-      from: "メラボコ <noreply@meraboco.com>",
+      from: "メラボコ <onboarding@resend.dev>",
       to: [sanitizedData.email],
       subject: "【メラボコ】お問い合わせありがとうございます",
       html: `

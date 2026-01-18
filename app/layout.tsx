@@ -227,6 +227,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${notoSansJP.variable} ${inter.variable} ${notoSerifJP.variable} font-sans antialiased`}
+        suppressHydrationWarning={true}
       >
         {/* AEO用構造化データをbody内に配置 */}
         <script

@@ -76,11 +76,10 @@ export default function Pricing() {
 
               {/* Card */}
               <div
-                className={`relative h-full rounded-3xl p-8 backdrop-blur-xl transition-all duration-500 ${
-                  plan.recommended
+                className={`relative h-full rounded-3xl p-8 backdrop-blur-xl transition-all duration-500 ${plan.recommended
                     ? "bg-white/90 shadow-2xl border-2 border-blue-500/20"
                     : "bg-white/60 shadow-xl border border-gray-200/50"
-                }`}
+                  }`}
                 style={{
                   transform: "translateZ(0)",
                 }}
@@ -137,26 +136,25 @@ export default function Pricing() {
                         className="flex items-start gap-3"
                       >
                         <Check
-                          className={`w-5 h-5 flex-shrink-0 mt-0.5 ${
-                            plan.recommended ? "text-blue-600" : "text-gray-600"
-                          }`}
+                          className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.recommended ? "text-blue-600" : "text-gray-600"
+                            }`}
                         />
                         <span className="text-sm text-gray-700 leading-relaxed">{feature}</span>
                       </motion.li>
                     ))}
                   </ul>
 
-                  <motion.button
+                  <motion.a
+                    href="#contact"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 ${
-                      plan.recommended
+                    className={`w-full py-4 rounded-xl font-semibold transition-all duration-300 text-center block ${plan.recommended
                         ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg hover:shadow-xl"
                         : "bg-gray-900 text-white hover:bg-gray-800"
-                    }`}
+                      }`}
                   >
                     {translations[language].contact.heading}
-                  </motion.button>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>

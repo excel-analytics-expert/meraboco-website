@@ -135,6 +135,29 @@ export const translations = {
       copyright: "© 2026 Meraboco. Created by s.kenichi",
       privacy: "プライバシーポリシー",
       terms: "利用規約",
+      law: "特定商取引法に基づく表記",
+    },
+    // Law Page
+    lawPage: {
+      title: "特定商取引法に基づく表記",
+      description: "メラボコが提供するサービスに関する特定商取引法に基づく表記を掲載しています。",
+      intro: "特定商取引に関する法律に基づく、サービスの提供条件を以下の通り定めます。",
+      notice: "透明性の高い取引を行うため、法的義務に基づき必要な情報を公開しています。",
+      seller: { label: "販売業者", value: "メラボコ（代表者：栗林 加奈子）" },
+      representative: { label: "運営責任者", value: "栗林 加奈子" },
+      location: { label: "所在地", value: "〒107-0061 東京都港区北青山1-3-3" },
+      phone: { label: "電話番号", value: "050-1793-1290" },
+      email: { label: "メールアドレス", value: "meraboco.2025.8@gmail.com" },
+      price: { label: "販売価格", value: "各プラン（Light/Standard/Premium）の詳細ページに表示された価格に基づきます。" },
+      otherCharges: { label: "商品代金以外の必要料金", value: "消費税、振込手数料（銀行振込時）。" },
+      paymentMethod: { label: "支払方法", value: "クレジットカード決済（Stripe）、銀行振込。" },
+      paymentTime: {
+        label: "支払時期",
+        value: ["クレジットカード：注文時", "銀行振込：注文後7日以内"],
+      },
+      deliveryTime: { label: "役務の提供時期", value: "契約締結後、ヒアリングを経て個別の納期に基づき提供します。" },
+      returns: { label: "返品・キャンセルについて", value: "制作物の性質上、着手後のキャンセルおよび返金には応じかねます。" },
+      updatedAt: "最終更新日：2026年1月18日",
     },
     // Company Page
     companyPage: {
@@ -386,6 +409,29 @@ export const translations = {
       copyright: "© 2026 Meraboco. Created by s.kenichi",
       privacy: "Privacy Policy",
       terms: "Terms of Service",
+      law: "Legal Notice (SCTL)",
+    },
+    // Law Page
+    lawPage: {
+      title: "Legal Notice (SCTL)",
+      description: "Specified Commercial Transactions Law notice for services provided by Meraboco.",
+      intro: "Terms of service provision based on the Act on Specified Commercial Transactions are defined as follows.",
+      notice: "In order to conduct highly transparent transactions, we disclose necessary information based on legal obligations.",
+      seller: { label: "Seller", value: "Meraboco (Representative: Kanako Kuribayashi)" },
+      representative: { label: "Representative", value: "Kanako Kuribayashi" },
+      location: { label: "Location", value: "1-3-3 Kita-Aoyama, Minato-ku, Tokyo 107-0061, Japan" },
+      phone: { label: "Phone Number", value: "050-1793-1290" },
+      email: { label: "Email Address", value: "meraboco.2025.8@gmail.com" },
+      price: { label: "Price", value: "Based on the prices displayed on each plan (Light/Standard/Premium) detail page." },
+      otherCharges: { label: "Additional Charges", value: "Consumption tax, bank transfer fees (for bank transfers)." },
+      paymentMethod: { label: "Payment Method", value: "Credit card payment (Stripe), bank transfer." },
+      paymentTime: {
+        label: "Payment Timing",
+        value: ["Credit card: At the time of order", "Bank transfer: Within 7 days after order"],
+      },
+      deliveryTime: { label: "Delivery Timing", value: "Provided based on individual delivery dates after contract conclusion and hearing." },
+      returns: { label: "Returns and Cancellations", value: "Due to the nature of the production, we cannot accept cancellations or refunds after work has commenced." },
+      updatedAt: "Last updated: January 18, 2026",
     },
     // Company Page
     companyPage: {

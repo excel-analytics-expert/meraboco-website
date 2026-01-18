@@ -19,7 +19,7 @@ export default function MatrixRainBackground() {
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
 
-    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
+    const chars = "メラボコmeraboco01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン"
     const charArray = chars.split("")
     const fontSize = 14
     const columns = Math.floor(canvas.width / fontSize)

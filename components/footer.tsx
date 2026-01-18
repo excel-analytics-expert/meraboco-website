@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="bg-gray-900 text-white pt-24 pb-16 mt-24 border-t-8 border-gray-800"
+      className="bg-gray-900 text-white pt-16 md:pt-24 pb-16 mt-12 md:mt-24 border-t-8 border-gray-800"
       style={{ isolation: "isolate" }}
     >
       <div className="container mx-auto px-4">
@@ -145,6 +145,14 @@ export default function Footer() {
                   className="hover:text-gray-300 hover:translate-x-2 inline-block transition-all duration-300"
                 >
                   {footerData.terms}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/law"
+                  className="hover:text-gray-300 hover:translate-x-2 inline-block transition-all duration-300"
+                >
+                  {footerData.law}
                 </Link>
               </li>
             </ul>

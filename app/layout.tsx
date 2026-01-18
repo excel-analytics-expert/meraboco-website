@@ -112,6 +112,17 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/site.webmanifest",
   verification: {
     google: "L-1Y42OSYyE1tjN6DqNnRY6qLVZuwYbWcxyJPHjF5h4",
   },
@@ -208,12 +219,6 @@ export default function RootLayout({
   return (
     <html lang="ja" className="scroll-smooth" suppressHydrationWarning>
       <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-        />
-        <link rel="icon" href="/favicon.ico" sizes="48x48" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         {/* Font Awesome 読み込み維持 */}
         <link
           rel="stylesheet"
@@ -223,6 +228,11 @@ export default function RootLayout({
       <body
         className={`${notoSansJP.variable} ${inter.variable} ${notoSerifJP.variable} font-sans antialiased`}
       >
+        {/* AEO用構造化データをbody内に配置 */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
         <LanguageProvider>
           {/* 背景コンポーネント群を維持 */}
           <NatureBackground />

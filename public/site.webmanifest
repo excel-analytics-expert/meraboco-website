@@ -4,8 +4,8 @@
   "description": "東京のWEB制作・システム開発・UXデザイン",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#2c3e50",
+  "background_color": "#fffbf5",
+  "theme_color": "#1a1a2e",
   "orientation": "portrait-primary",
   "icons": [
     {

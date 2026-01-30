@@ -121,6 +121,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "kern" 1, "liga" 1;
@@ -150,34 +151,44 @@
 }
 
 @keyframes grain {
+
   0%,
   100% {
     transform: translate3d(0, 0, 0);
   }
+
   10% {
     transform: translate3d(-5%, -10%, 0);
   }
+
   20% {
     transform: translate3d(-15%, 5%, 0);
   }
+
   30% {
     transform: translate3d(7%, -25%, 0);
   }
+
   40% {
     transform: translate3d(-5%, 25%, 0);
   }
+
   50% {
     transform: translate3d(-15%, 10%, 0);
   }
+
   60% {
     transform: translate3d(15%, 0%, 0);
   }
+
   70% {
     transform: translate3d(0%, 15%, 0);
   }
+
   80% {
     transform: translate3d(3%, 35%, 0);
   }
+
   90% {
     transform: translate3d(-10%, 10%, 0);
   }
@@ -190,6 +201,7 @@
     transform: translate3d(0, 40px, 0) scale3d(0.8, 0.8, 1);
     letter-spacing: 0.3em;
   }
+
   100% {
     opacity: 1;
     filter: blur(0px);
@@ -202,6 +214,7 @@
   0% {
     transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
   }
+
   100% {
     transform: scale3d(1.15, 1.15, 1) translate3d(-2%, -2%, 0);
   }
@@ -212,10 +225,12 @@
     opacity: 0;
     transform: translate3d(0, 80px, 0) scale3d(0.95, 0.95, 1);
   }
+
   60% {
     opacity: 1;
     transform: translate3d(0, -10px, 0) scale3d(1.02, 1.02, 1);
   }
+
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale3d(1, 1, 1);
@@ -223,10 +238,12 @@
 }
 
 @keyframes neonPulse {
+
   0%,
   100% {
     box-shadow: 0 0 5px rgba(0, 255, 200, 0.3), 0 0 20px rgba(0, 255, 200, 0.1);
   }
+
   50% {
     box-shadow: 0 0 10px rgba(0, 255, 200, 0.5), 0 0 40px rgba(0, 255, 200, 0.2);
   }
@@ -236,9 +253,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -279,16 +298,16 @@
 }
 
 .glass-card-light {
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(40px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 20, 40, 0.7);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(0, 255, 200, 0.1);
 }
 
-.glass-feature-card {
-  background: rgba(255, 255, 255, 0.03);
+.glass-refined-demo {
+  background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(24px) saturate(150%);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -469,6 +488,7 @@ a:active {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -497,9 +517,11 @@ a:active {
     opacity: 0;
     transform: translateX(-20px);
   }
+
   50% {
     opacity: 1;
   }
+
   100% {
     opacity: 0;
     transform: translateX(20px);

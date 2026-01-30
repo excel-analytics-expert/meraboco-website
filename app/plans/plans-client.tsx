@@ -53,10 +53,10 @@ export default function PlansClient({ plans, hasError }: PlansClientProps) {
                     </div>
                     <div className="mt-2 text-sm font-semibold text-stone-500">{getPlanName(plan)}</div>
                     <div className="mt-3 flex items-baseline gap-1">
-                      <span className="text-2xl font-semibold text-stone-800">
+                      <span className="text-2xl font-semibold text-stone-900">
                         {plan.monthlyPrice}
                       </span>
-                      <span className="text-sm text-stone-500">円 / 毎月</span>
+                      <span className="text-sm text-stone-600 font-medium">円 / 毎月</span>
                     </div>
                     <div className="mt-1 text-xs text-stone-500">
                       {t.initialCost} {plan.initialCost}

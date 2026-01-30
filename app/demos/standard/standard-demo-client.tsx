@@ -204,7 +204,7 @@ export default function StandardDemoClient({
               return (
                 <div
                   key={item.title}
-                  className="glass-feature-card rounded-2xl border border-white/20 bg-white/5 p-8 shadow-2xl hover:scale-105 transition-all duration-[900ms] group"
+                  className="glass-refined-demo rounded-2xl p-8 group"
                 >
                   <div className="flex items-center gap-4 text-amber-400">
                     <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-amber-400/50 transition-colors duration-500">

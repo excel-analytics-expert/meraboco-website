@@ -66,7 +66,7 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
                 smartPlans.map((plan) => (
                   <div
                     key={plan.id}
-                    className="glass-card-light group rounded-2xl border border-white/20 bg-white/10 px-6 py-6 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50"
+                    className="glass-card-light group rounded-2xl border border-stone-200/70 p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50"
                   >
                     <div className="text-sm font-semibold tracking-[0.3em] text-stone-400">
                       {getPlanName(plan)}
@@ -113,7 +113,7 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
             </div>
             <div className="grid gap-6 md:grid-cols-3">
               {!showEmpty && proPlan && smartPlans.every((plan) => plan.id !== proPlan.id) && (
-                <div className="glass-card-light group rounded-2xl border border-white/20 bg-white/10 px-6 py-6 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50">
+                <div className="glass-card-light group rounded-2xl border border-stone-200/70 p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50">
                   <div className="text-sm font-semibold tracking-[0.3em] text-stone-400">
                     {getPlanName(proPlan)}
                   </div>
@@ -140,7 +140,7 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
               {customPlans.map((plan) => (
                 <div
                   key={plan.title}
-                  className="glass-card-light group rounded-2xl border border-white/20 bg-white/10 px-6 py-6 text-sm text-stone-200 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50"
+                  className="glass-card-light group rounded-2xl border border-stone-200/70 p-6 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50"
                 >
                   <div className="text-sm font-semibold tracking-[0.3em] text-stone-400">
                     {plan.title}

@@ -60,7 +60,7 @@ export default function Contact() {
         setFormStatus("success")
         setFormMessage(contactData.form.success)
         setFormData({ name: "", email: "", company: "", message: "" })
-        
+
         // Clear success message after 5 seconds
         setTimeout(() => {
           setFormMessage("")
@@ -69,7 +69,7 @@ export default function Contact() {
       } else {
         setFormStatus("error")
         setFormMessage(data.error || contactData.form.error)
-        
+
         // Clear error message after 5 seconds
         setTimeout(() => {
           setFormMessage("")
@@ -80,7 +80,7 @@ export default function Contact() {
       console.error("Contact form error:", error)
       setFormStatus("error")
       setFormMessage(contactData.form.error)
-      
+
       // Clear error message after 5 seconds
       setTimeout(() => {
         setFormMessage("")
@@ -100,7 +100,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-32 md:py-40 relative bg-transparent mt-24 mb-24"
+      className="py-32 md:py-40 relative bg-transparent mt-24 mb-24 pb-32"
       style={{ isolation: "isolate" }}
     >
 
@@ -274,11 +274,10 @@ export default function Contact() {
         {formMessage && (
           <div className="mt-10 text-center">
             <p
-              className={`font-medium glass-card-light border border-white/20 bg-white/10 backdrop-blur-2xl py-4 px-6 rounded-2xl inline-block animate-fade-in ${
-                formStatus === "success" ? "text-emerald-300" : 
-                formStatus === "error" ? "text-red-300" : 
-                "text-blue-300"
-              }`}
+              className={`font-medium glass-card-light border border-white/20 bg-white/10 backdrop-blur-2xl py-4 px-6 rounded-2xl inline-block animate-fade-in ${formStatus === "success" ? "text-emerald-300" :
+                formStatus === "error" ? "text-red-300" :
+                  "text-blue-300"
+                }`}
             >
               {formStatus === "success" && (
                 <span className="inline-flex items-center gap-2">

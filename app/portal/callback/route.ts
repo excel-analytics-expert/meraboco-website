@@ -17,5 +17,6 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${origin}/portal/login`)
   }
 
-  return NextResponse.redirect(`${origin}/portal/dashboard`)
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || origin
+  return NextResponse.redirect(`${siteUrl}/portal/dashboard`)
 }

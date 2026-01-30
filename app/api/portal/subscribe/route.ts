@@ -67,7 +67,7 @@ export async function POST(request: Request) {
 
   const now = new Date()
   const signedAt = toJstIsoString(now)
-  const origin = request.headers.get("origin") || process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  const origin = request.headers.get("origin") || process.env.NEXT_PUBLIC_SITE_URL || "https://meraboco.jp"
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0] ||
     request.headers.get("x-real-ip") ||

@@ -18,12 +18,12 @@ export async function sendMagicLink(
   }
 
   const supabase = await createSupabaseServerClient()
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://meraboco.jp"
 
   const { error } = await supabase.auth.signInWithOtp({
     email,
     options: {
-      emailRedirectTo: `${siteUrl}/portal/callback`,
+      emailRedirectTo: `${siteUrl}/dashboard`,
     },
   })
 

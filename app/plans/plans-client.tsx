@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/page-header"
 import { useLanguage } from "@/contexts/language-context"
 import type { MicroCmsPricingPlan } from "@/types/microcms"
 import Link from "next/link"
+import { motion } from "framer-motion"
 
 type PlansClientProps = {
   plans: MicroCmsPricingPlan[]
@@ -44,47 +45,69 @@ export default function PlansClient({ plans, hasError }: PlansClientProps) {
               )}
               {!hasError &&
                 plans.map((plan) => (
-                  <div
+                  <motion.div
                     key={plan.id}
-                    className="rounded-2xl border border-stone-200/60 bg-white px-6 py-6 shadow-sm"
+                    className="glass-main-pricing group relative rounded-3xl p-8 shadow-xl border border-stone-100 transition-all duration-700"
+                    initial="initial"
+                    whileHover={{ y: -2 }}
                   >
-                    <div className="text-xs font-semibold tracking-[0.2em] text-amber-700/80">
-                      {planLabel(plan, t.labels)}
-                    </div>
-                    <div className="mt-2 text-sm font-semibold text-stone-500">{getPlanName(plan)}</div>
-                    <div className="mt-3 flex items-baseline gap-1">
-                      <span className="text-2xl font-semibold text-stone-900">
-                        {plan.monthlyPrice}
-                      </span>
-                      <span className="text-sm text-stone-600 font-medium">円 / 毎月</span>
-                    </div>
-                    <div className="mt-1 text-xs text-stone-500">
-                      {t.initialCost} {plan.initialCost}
-                    </div>
-                    <p className="mt-2 text-sm text-stone-600">{getPlanSummary(plan)}</p>
-                    {getPlanFeatures(plan).length > 0 && (
-                      <ul className="mt-4 space-y-2 text-sm text-stone-600">
-                        {getPlanFeatures(plan).map((feature) => (
-                          <li key={feature}>・{feature}</li>
-                        ))}
-                      </ul>
-                    )}
-                    <div className="mt-6 grid gap-3">
-                      <Link
-                        href={demoHrefForPlan(plan)}
-                        className="inline-flex w-full items-center justify-center rounded-2xl border border-blue-100 bg-sky-50 px-4 py-2 text-sm font-semibold text-stone-900 transition-all duration-300 hover:-translate-y-0.5 hover:bg-sky-100"
+                    <div className="flex flex-col items-center text-center">
+                      <div className="text-xs font-bold tracking-[0.3em] text-blue-600 uppercase transition-colors duration-500 group-hover:text-blue-700">
+                        {planLabel(plan, t.labels)}
+                      </div>
+                      <div className="mt-3 text-xl font-bold text-slate-900 tracking-wide">{getPlanName(plan)}</div>
+
+                      {/* Interactive Reveal Section */}
+                      <motion.div
+                        className="overflow-hidden"
+                        variants={{
+                          initial: { height: 0, opacity: 0, marginTop: 0 },
+                          hover: { height: "auto", opacity: 1, marginTop: 32 }
+                        }}
+                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                       >
-                        {t.demo}
-                      </Link>
-                      <Link
-                        href={`/portal/subscribe?plan=${plan.id}`}
-                        className="inline-flex w-full items-center justify-center rounded-2xl bg-stone-900 px-4 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-stone-800"
-                      >
-                        {t.contract}
-                      </Link>
-                      <p className="text-xs text-stone-500">{t.contractNote}</p>
+                        <div className="flex flex-col items-center">
+                          <div className="flex items-baseline gap-1">
+                            <span className="text-4xl font-bold text-slate-900">
+                              {plan.monthlyPrice}
+                            </span>
+                            <span className="text-sm text-slate-500 font-medium">円 / 毎月</span>
+                          </div>
+                          <div className="mt-2 text-xs font-medium text-slate-400">
+                            {t.initialCost} {plan.initialCost}
+                          </div>
+                          <p className="mt-6 text-sm text-slate-600 leading-relaxed font-medium">{getPlanSummary(plan)}</p>
+
+                          {getPlanFeatures(plan).length > 0 && (
+                            <ul className="mt-6 space-y-3 text-sm text-slate-500 font-medium w-full text-left">
+                              {getPlanFeatures(plan).map((feature) => (
+                                <li key={feature} className="flex items-center gap-2">
+                                  <span className="h-1.5 w-1.5 rounded-full bg-blue-500/30" />
+                                  {feature}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+
+                          <div className="mt-8 grid gap-3 w-full">
+                            <Link
+                              href={demoHrefForPlan(plan)}
+                              className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white/50 px-6 py-4 text-sm font-bold text-slate-800 transition-all duration-500 hover:border-blue-400/50 hover:bg-white hover:text-blue-600 shadow-sm"
+                            >
+                              {t.demo}
+                            </Link>
+                            <Link
+                              href={`/portal/subscribe?plan=${plan.id}`}
+                              className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-6 py-4 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
+                            >
+                              {t.contract}
+                            </Link>
+                            <p className="text-center text-[10px] text-slate-400 mt-2">{t.contractNote}</p>
+                          </div>
+                        </div>
+                      </motion.div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
             </div>
             <div className="mt-10 text-sm text-stone-600">

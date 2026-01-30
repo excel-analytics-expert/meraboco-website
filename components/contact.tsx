@@ -100,7 +100,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-32 md:py-40 relative bg-transparent mt-24 mb-24 pb-32"
+      className="py-32 md:py-40 relative bg-transparent mt-24 pb-64 md:pb-80"
       style={{ isolation: "isolate" }}
     >
 
@@ -123,7 +123,7 @@ export default function Contact() {
           className={`mx-auto mb-10 max-w-3xl transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
           style={{ transitionDelay: "150ms" }}
         >
-          <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-6 text-left shadow-xl">
+          <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-3xl p-6 text-left shadow-xl">
             <p className="text-sm leading-relaxed text-white/80">{inquiryNotice}</p>
           </div>
         </div>
@@ -133,7 +133,7 @@ export default function Contact() {
             className={`space-y-8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
             style={{ transitionDelay: "200ms" }}
           >
-            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-8 text-left shadow-xl">
+            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-3xl p-8 text-left shadow-xl">
               <h3 className="text-lg font-semibold mb-4 text-white/90">{contactData.phoneLabel}</h3>
               <a
                 href="tel:050-1793-1290"
@@ -144,7 +144,7 @@ export default function Contact() {
               </a>
               <p className="text-sm text-white/60 mt-4 leading-relaxed">{contactData.aiNotice}</p>
             </div>
-            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-8 text-left shadow-xl">
+            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-3xl p-8 text-left shadow-xl">
               <h3 className="text-lg font-semibold mb-4 text-white/90">
                 {language === "ja" ? "営業時間" : "Business Hours"}
               </h3>
@@ -159,7 +159,7 @@ export default function Contact() {
             className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
             style={{ transitionDelay: "300ms" }}
           >
-            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-8 md:p-12 shadow-xl">
+            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-3xl p-8 md:p-12 shadow-xl">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="group">
                   <label
@@ -251,7 +251,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={formStatus === "sending"}
-                    className="w-full px-12 py-4 rounded-full bg-white/20 text-white border border-white/20 hover:bg-blue-600 hover:scale-105 hover:shadow-2xl transition-all duration-500 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                    className="w-full px-12 py-5 rounded-full bg-white/20 text-white border border-white/20 hover:bg-blue-600 transition-all duration-700 font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-blue-500/20"
                   >
                     {formStatus === "sending" ? (
                       <span className="flex items-center justify-center gap-2">
@@ -274,7 +274,7 @@ export default function Contact() {
         {formMessage && (
           <div className="mt-10 text-center">
             <p
-              className={`font-medium glass-card-light border border-white/20 bg-white/10 backdrop-blur-2xl py-4 px-6 rounded-2xl inline-block animate-fade-in ${formStatus === "success" ? "text-emerald-300" :
+              className={`font-medium glass-card-light border border-white/20 bg-white/10 backdrop-blur-3xl py-4 px-6 rounded-2xl inline-block animate-fade-in ${formStatus === "success" ? "text-emerald-300" :
                 formStatus === "error" ? "text-red-300" :
                   "text-blue-300"
                 }`}

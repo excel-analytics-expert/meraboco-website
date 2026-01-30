@@ -156,27 +156,30 @@ export default function StandardDemoClient({
 
       <motion.section
         id="about"
-        className="py-24"
+        className="py-24 bg-[#FDFCFB] relative overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeIn}
       >
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+        <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center relative z-10">
           <div>
-            <p className="text-xs font-semibold tracking-[0.25em] text-amber-700/80">{t.aboutLabel}</p>
-            <h2 className="mt-4 text-3xl font-semibold text-stone-800">{t.aboutTitle}</h2>
+            <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80 uppercase">{t.aboutLabel}</p>
+            <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.aboutTitle}</h2>
             <p className="mt-6 text-base leading-relaxed text-stone-600">
               {siteDescription}
             </p>
           </div>
-          <div className="glass-card-light rounded-3xl border border-stone-200/70 bg-white/90 p-8 shadow-lg">
-            <p className="text-xs font-semibold tracking-[0.25em] text-amber-700/80">{t.highlightsLabel}</p>
-            <h3 className="mt-3 text-xl font-semibold text-stone-800">{t.highlightsTitle}</h3>
-            <p className="mt-4 text-sm leading-relaxed text-stone-600">{t.highlightsIntro}</p>
-            <div className="mt-6 grid gap-3 text-sm text-stone-600">
+          <div className="glass-crystal-demo rounded-3xl p-8 shadow-xl border border-stone-200/50">
+            <p className="text-xs font-bold tracking-[0.25em] text-amber-500 uppercase">{t.highlightsLabel}</p>
+            <h3 className="mt-3 text-xl font-bold text-stone-800 tracking-wide">{t.highlightsTitle}</h3>
+            <p className="mt-4 text-sm leading-relaxed text-stone-600 font-medium">{t.highlightsIntro}</p>
+            <div className="mt-6 grid gap-3 text-sm text-stone-600 font-medium">
               {t.serviceHighlights.map((item: string) => (
-                <div key={item}>・{item}</div>
+                <div key={item} className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-500/40" />
+                  {item}
+                </div>
               ))}
             </div>
           </div>
@@ -185,34 +188,33 @@ export default function StandardDemoClient({
 
       <motion.section
         id="service"
-        className="relative py-24 bg-stone-900/95 overflow-hidden"
+        className="relative py-24 bg-white overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeIn}
       >
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,113,108,0.1),transparent)]" />
         <div className="mx-auto max-w-6xl px-6 relative z-10">
           <div className="mb-12">
-            <p className="text-xs font-semibold tracking-[0.25em] text-amber-400/80 uppercase">{t.sectionLabel}</p>
-            <h2 className="mt-4 text-3xl font-bold text-white text-shadow-glow">{t.highlightsTitle}</h2>
-            <p className="mt-4 text-base text-stone-300 max-w-2xl">{t.highlightsIntro}</p>
+            <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80 uppercase">{t.sectionLabel}</p>
+            <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.highlightsTitle}</h2>
+            <p className="mt-4 text-base text-stone-600 max-w-2xl">{t.highlightsIntro}</p>
           </div>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-3">
             {t.featureItems.map((item: { title: string; description: string }, index: number) => {
               const Icon = [Globe, Search, Layers][index] || Globe
               return (
                 <div
                   key={item.title}
-                  className="glass-refined-demo rounded-2xl p-8 group"
+                  className="glass-crystal-demo rounded-3xl p-8 group shadow-lg transition-all duration-700 hover:-translate-y-1 hover:shadow-xl"
                 >
-                  <div className="flex items-center gap-4 text-amber-400">
-                    <div className="p-2 rounded-lg bg-white/5 border border-white/10 group-hover:border-amber-400/50 transition-colors duration-500">
-                      <Icon className="h-6 w-6 filter drop-shadow-[0_0_8px_rgba(251,191,36,0.4)]" />
+                  <div className="flex items-center gap-4 text-amber-600">
+                    <div className="p-3 rounded-2xl bg-amber-500/5 group-hover:bg-amber-500/10 transition-colors duration-500">
+                      <Icon className="h-6 w-6" />
                     </div>
-                    <p className="text-sm font-bold tracking-[0.15em] text-white text-shadow-sm">{item.title}</p>
+                    <p className="text-sm font-bold tracking-[0.15em] text-stone-800">{item.title}</p>
                   </div>
-                  <p className="mt-5 text-sm leading-relaxed text-gray-200 text-shadow-sm font-medium">{item.description}</p>
+                  <p className="mt-6 text-sm leading-relaxed text-stone-600 font-medium">{item.description}</p>
                 </div>
               )
             })}
@@ -295,35 +297,37 @@ export default function StandardDemoClient({
 
       <motion.section
         id="news"
-        className="py-24"
+        className="py-24 bg-[#FDFCFB]"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeIn}
       >
         <div className="mx-auto max-w-6xl px-6">
-          <div className="mb-10 flex items-end justify-between">
+          <div className="mb-12 flex items-end justify-between">
             <div>
-              <p className="text-xs font-semibold tracking-[0.25em] text-amber-700/80">{t.newsLabel}</p>
-              <h2 className="mt-4 text-3xl font-semibold text-stone-800">{t.newsTitle}</h2>
+              <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80 uppercase">{t.newsLabel}</p>
+              <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.newsTitle}</h2>
             </div>
-            <span className="text-sm text-stone-500">{t.newsNote}</span>
+            <span className="text-sm text-stone-400">{t.newsNote}</span>
           </div>
           {newsError || news.length === 0 ? (
-            <div className="rounded-2xl border border-stone-200/60 bg-white/90 px-6 py-6 text-sm text-stone-600 shadow-lg">
+            <div className="rounded-2xl border border-stone-200/60 bg-stone-50/50 px-6 py-8 text-sm text-stone-600">
               {t.newsEmpty}
             </div>
           ) : (
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="grid gap-8 md:grid-cols-3">
               {news.map((item) => (
                 <div
                   key={item.id}
-                  className="glass-card-light rounded-2xl border border-stone-200/70 bg-white/90 p-6 shadow-lg transition-all duration-500 hover:-translate-y-1 hover:shadow-xl"
+                  className="glass-crystal-demo rounded-3xl p-8 shadow-lg transition-all duration-700 hover:-translate-y-1 hover:shadow-xl group"
                 >
-                  <div className="text-xs text-stone-500">{formatDate(item, language, t.updatedAtFallback)}</div>
-                  <div className="mt-3 text-base font-semibold text-stone-800">{item.title}</div>
+                  <div className="text-xs text-amber-700/60 font-medium uppercase tracking-wider">
+                    {formatDate(item, language, t.updatedAtFallback)}
+                  </div>
+                  <div className="mt-4 text-lg font-bold text-stone-800 tracking-wide group-hover:text-amber-800 transition-colors duration-500">{item.title}</div>
                   {item.summary && (
-                    <p className="mt-3 text-sm leading-relaxed text-stone-600">{item.summary}</p>
+                    <p className="mt-4 text-sm leading-relaxed text-stone-600 font-medium">{item.summary}</p>
                   )}
                 </div>
               ))}
@@ -334,36 +338,36 @@ export default function StandardDemoClient({
 
       <motion.section
         id="info"
-        className="py-24"
+        className="py-24 bg-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeIn}
       >
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-          <div className="glass-card-light rounded-3xl border border-stone-200/70 bg-white/90 p-8 shadow-lg">
-            <p className="text-xs font-semibold tracking-[0.25em] text-amber-700/80">{t.infoLabel}</p>
-            <h2 className="mt-4 text-3xl font-semibold text-stone-800">{t.accessTitle}</h2>
-            <div className="mt-6 space-y-4 text-sm text-stone-600">
-              <div>
-                <p className="font-semibold text-stone-700">{t.infoLabels.address}</p>
-                <p>{dummyInfo.address}</p>
+          <div className="glass-crystal-demo rounded-3xl p-8 shadow-xl border border-stone-200/50">
+            <p className="text-sm font-bold tracking-[0.25em] text-amber-700/80 uppercase">{t.infoLabel}</p>
+            <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.accessTitle}</h2>
+            <div className="mt-8 space-y-6 text-sm text-stone-600 font-medium">
+              <div className="border-l-2 border-amber-500/20 pl-4">
+                <p className="font-bold text-stone-400 tracking-wider text-[10px] uppercase mb-1">{t.infoLabels.address}</p>
+                <p className="text-stone-700">{dummyInfo.address}</p>
               </div>
-              <div>
-                <p className="font-semibold text-stone-700">{t.infoLabels.phone}</p>
-                <p>{dummyInfo.phone}</p>
+              <div className="border-l-2 border-amber-500/20 pl-4">
+                <p className="font-bold text-stone-400 tracking-wider text-[10px] uppercase mb-1">{t.infoLabels.phone}</p>
+                <p className="text-stone-700">{dummyInfo.phone}</p>
               </div>
-              <div>
-                <p className="font-semibold text-stone-700">{t.infoLabels.hours}</p>
-                <p>{dummyInfo.hours}</p>
+              <div className="border-l-2 border-amber-500/20 pl-4">
+                <p className="font-bold text-stone-400 tracking-wider text-[10px] uppercase mb-1">{t.infoLabels.hours}</p>
+                <p className="text-stone-700">{dummyInfo.hours}</p>
               </div>
             </div>
           </div>
-          <div className="overflow-hidden rounded-3xl border border-stone-200/70 bg-white/90 shadow-lg">
+          <div className="overflow-hidden rounded-3xl border border-stone-200/50 bg-stone-50 shadow-2xl">
             <iframe
               title="Google Map"
               src={mapUrl}
-              className="h-80 w-full border-0 md:h-96"
+              className="h-80 w-full border-0 md:h-96 grayscale hover:grayscale-0 transition-all duration-1000"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />
@@ -373,14 +377,14 @@ export default function StandardDemoClient({
 
       <motion.section
         id="sightseeing"
-        className="py-24"
+        className="py-24 bg-[#FDFCFB]"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeIn}
       >
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1fr_1fr] md:items-center">
-          <div className="group overflow-hidden rounded-3xl border border-stone-200/70 bg-white shadow-lg">
+          <div className="group overflow-hidden rounded-3xl border border-stone-200/50 bg-stone-50 shadow-2xl">
             <div className="relative h-72 overflow-hidden">
               <div
                 className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
@@ -389,17 +393,17 @@ export default function StandardDemoClient({
                     "url(https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80)",
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/15 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
             </div>
           </div>
-          <div>
-            <p className="text-xs font-semibold tracking-[0.25em] text-amber-700/80">{t.sectionLabel}</p>
-            <h2 className="mt-4 text-3xl font-semibold text-stone-800">{t.sightseeingTitle}</h2>
-            <p className="mt-6 text-base leading-relaxed text-stone-600">{t.sightseeingText}</p>
-            <div className="mt-6 space-y-3 text-sm text-stone-600">
+          <div className="glass-crystal-demo rounded-3xl p-8 shadow-xl border border-stone-200/50">
+            <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80 uppercase">{t.sectionLabel}</p>
+            <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.sightseeingTitle}</h2>
+            <p className="mt-6 text-base leading-relaxed text-stone-600 font-medium">{t.sightseeingText}</p>
+            <div className="mt-6 space-y-3 text-sm text-stone-600 font-medium">
               {t.sightseeingItems.map((item: string) => (
                 <div key={item} className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-amber-700" />
+                  <MapPin className="h-4 w-4 text-amber-500/70" />
                   {item}
                 </div>
               ))}
@@ -410,26 +414,26 @@ export default function StandardDemoClient({
 
       <motion.section
         id="action"
-        className="py-24"
+        className="py-24 bg-[#FDFCFB] border-t border-stone-100"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeIn}
       >
         <div className="mx-auto max-w-5xl px-6 text-center">
-          <p className="text-xs font-semibold tracking-[0.25em] text-amber-700/80">RESERVATION</p>
-          <h2 className="mt-4 text-3xl font-semibold text-stone-800">{t.actionTitle}</h2>
-          <p className="mt-4 text-base text-stone-600">{t.actionText}</p>
+          <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80 uppercase">RESERVATION</p>
+          <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.actionTitle}</h2>
+          <p className="mt-4 text-base text-stone-600 font-medium">{t.actionText}</p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 md:flex-row">
             <a
               href={`tel:${dummyInfo.phone}`}
-              className="w-full rounded-full bg-amber-800 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-amber-900 md:w-auto"
+              className="w-full rounded-full bg-amber-700 px-8 py-4 text-base font-bold text-white shadow-xl transition-all duration-700 hover:-translate-y-1 hover:bg-amber-800 md:w-auto"
             >
               {t.actionButtons.call}
             </a>
             <a
               href="https://line.me/R/ti/p/@meraboco"
-              className="w-full rounded-full border border-amber-800/30 bg-white px-8 py-4 text-base font-semibold text-stone-800 shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-800/50 md:w-auto"
+              className="w-full rounded-full border border-green-500/30 bg-green-50/50 px-8 py-4 text-base font-bold text-green-700 shadow-xl transition-all duration-700 hover:-translate-y-1 hover:bg-green-100 md:w-auto"
               target="_blank"
               rel="noreferrer"
             >
@@ -437,7 +441,7 @@ export default function StandardDemoClient({
             </a>
             <Link
               href="/contact"
-              className="w-full rounded-full bg-stone-900 px-8 py-4 text-base font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:bg-stone-800 md:w-auto"
+              className="w-full rounded-full bg-stone-900 px-8 py-4 text-base font-bold text-white shadow-xl transition-all duration-700 hover:-translate-y-1 hover:bg-black md:w-auto"
             >
               {consultLabel}
             </Link>
@@ -450,7 +454,7 @@ export default function StandardDemoClient({
           {t.note}
         </span>
       </div>
-    </div>
+    </div >
   )
 }
 

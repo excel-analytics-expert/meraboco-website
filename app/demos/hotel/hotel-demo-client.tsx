@@ -86,18 +86,16 @@ export default function HotelDemoClient({ site, siteError, news, newsError }: Ho
               <button
                 type="button"
                 onClick={() => setLanguage("ja")}
-                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
-                  language === "ja" ? "bg-stone-900 text-white" : "bg-stone-200/70 text-stone-700 hover:bg-stone-300"
-                }`}
+                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${language === "ja" ? "bg-stone-900 text-white" : "bg-stone-200/70 text-stone-700 hover:bg-stone-300"
+                  }`}
               >
                 {headerCopy.languageJa}
               </button>
               <button
                 type="button"
                 onClick={() => setLanguage("en")}
-                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
-                  language === "en" ? "bg-stone-900 text-white" : "bg-stone-200/70 text-stone-700 hover:bg-stone-300"
-                }`}
+                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${language === "en" ? "bg-stone-900 text-white" : "bg-stone-200/70 text-stone-700 hover:bg-stone-300"
+                  }`}
               >
                 {headerCopy.languageEn}
               </button>
@@ -132,28 +130,31 @@ export default function HotelDemoClient({ site, siteError, news, newsError }: Ho
 
       <motion.section
         id="about"
-        className="py-24"
+        className="py-24 bg-[#FDFCFB] relative overflow-hidden"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeIn}
       >
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center">
+        <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.1fr_0.9fr] md:items-center relative z-10">
           <div>
-            <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80">{t.aboutLabel}</p>
-            <h2 className="mt-4 text-3xl font-semibold text-stone-800">{t.aboutTitle}</h2>
+            <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80 uppercase">{t.aboutLabel}</p>
+            <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.aboutTitle}</h2>
             <p className="mt-6 text-base leading-relaxed text-stone-600">
               {siteDescription}
             </p>
           </div>
-          <div className="glass-card-light rounded-3xl border border-stone-200/70 bg-white/90 p-8 shadow-lg">
-            <h3 className="text-lg font-semibold text-stone-800">{t.aboutSubtitle}</h3>
-            <p className="mt-4 text-sm leading-relaxed text-stone-600">
+          <div className="glass-crystal-demo rounded-3xl p-8 shadow-xl border border-stone-200/50">
+            <h3 className="text-lg font-bold text-stone-800 tracking-wider">{t.aboutSubtitle}</h3>
+            <p className="mt-4 text-sm leading-relaxed text-stone-600 font-medium">
               {t.aboutText}
             </p>
-            <div className="mt-6 grid gap-4 text-sm text-stone-600">
+            <div className="mt-6 grid gap-4 text-sm text-stone-600 font-medium">
               {t.aboutBullets.map((item: string) => (
-                <div key={item}>・{item}</div>
+                <div key={item} className="flex items-center gap-2">
+                  <span className="h-1.5 w-1.5 rounded-full bg-amber-500/40" />
+                  {item}
+                </div>
               ))}
             </div>
           </div>
@@ -162,7 +163,7 @@ export default function HotelDemoClient({ site, siteError, news, newsError }: Ho
 
       <motion.section
         id="news"
-        className="py-24"
+        className="py-24 bg-white"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -171,13 +172,13 @@ export default function HotelDemoClient({ site, siteError, news, newsError }: Ho
         <div className="mx-auto max-w-6xl px-6">
           <div className="mb-10 flex items-end justify-between">
             <div>
-              <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80">{t.newsLabel}</p>
-              <h2 className="mt-4 text-3xl font-semibold text-stone-800">{t.newsTitle}</h2>
+              <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80 uppercase">{t.newsLabel}</p>
+              <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.newsTitle}</h2>
             </div>
-            <span className="text-sm text-stone-500">{t.newsNote}</span>
+            <span className="text-sm text-stone-400">{t.newsNote}</span>
           </div>
           {newsError || news.length === 0 ? (
-            <div className="rounded-2xl border border-stone-200/60 bg-white/90 px-6 py-6 text-sm text-stone-600 shadow-lg">
+            <div className="rounded-2xl border border-stone-200/60 bg-stone-50/50 px-6 py-6 text-sm text-stone-600">
               {t.newsEmpty}
             </div>
           ) : (
@@ -185,12 +186,12 @@ export default function HotelDemoClient({ site, siteError, news, newsError }: Ho
               {news.map((item) => (
                 <div
                   key={item.id}
-                  className="glass-card-light rounded-2xl border border-stone-200/70 bg-white/90 p-6 shadow-lg"
+                  className="glass-crystal-demo rounded-2xl p-6 shadow-lg transition-all duration-700 hover:-translate-y-1 hover:shadow-xl group"
                 >
-                  <div className="text-xs text-stone-500">{formatDate(item, language, t.updatedAtFallback)}</div>
-                  <div className="mt-3 text-base font-semibold text-stone-800">{item.title}</div>
+                  <div className="text-xs text-amber-700/60 font-bold uppercase tracking-wider">{formatDate(item, language, t.updatedAtFallback)}</div>
+                  <div className="mt-3 text-base font-bold text-stone-800 tracking-wide transition-colors duration-500 group-hover:text-amber-800">{item.title}</div>
                   {item.summary && (
-                    <p className="mt-3 text-sm leading-relaxed text-stone-600">{item.summary}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-stone-600 font-medium">{item.summary}</p>
                   )}
                 </div>
               ))}
@@ -201,36 +202,36 @@ export default function HotelDemoClient({ site, siteError, news, newsError }: Ho
 
       <motion.section
         id="info"
-        className="py-24"
+        className="py-24 bg-[#FDFCFB]"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
         variants={fadeIn}
       >
         <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[0.9fr_1.1fr] md:items-center">
-          <div className="glass-card-light rounded-3xl border border-stone-200/70 bg-white/90 p-8 shadow-lg">
-            <p className="text-sm font-semibold tracking-[0.25em] text-amber-700/80">{t.infoLabel}</p>
-            <h2 className="mt-4 text-3xl font-semibold text-stone-800">{t.infoTitle}</h2>
-            <div className="mt-6 space-y-4 text-sm text-stone-600">
-              <div>
-                <p className="font-semibold text-stone-700">{t.infoLabels.address}</p>
-                <p>{dummyInfo.address}</p>
+          <div className="glass-crystal-demo rounded-3xl p-8 shadow-xl border border-stone-200/50">
+            <p className="text-sm font-bold tracking-[0.25em] text-amber-700/80 uppercase">{t.infoLabel}</p>
+            <h2 className="mt-4 text-3xl font-bold text-stone-800 tracking-wide">{t.infoTitle}</h2>
+            <div className="mt-8 space-y-6 text-sm text-stone-600 font-medium">
+              <div className="border-l-2 border-amber-500/20 pl-4">
+                <p className="font-bold text-stone-400 tracking-wider text-[10px] uppercase mb-1">{t.infoLabels.address}</p>
+                <p className="text-stone-700">{dummyInfo.address}</p>
               </div>
-              <div>
-                <p className="font-semibold text-stone-700">{t.infoLabels.phone}</p>
-                <p>{dummyInfo.phone}</p>
+              <div className="border-l-2 border-amber-500/20 pl-4">
+                <p className="font-bold text-stone-400 tracking-wider text-[10px] uppercase mb-1">{t.infoLabels.phone}</p>
+                <p className="text-stone-700">{dummyInfo.phone}</p>
               </div>
-              <div>
-                <p className="font-semibold text-stone-700">{t.infoLabels.hours}</p>
-                <p>{dummyInfo.hours}</p>
+              <div className="border-l-2 border-amber-500/20 pl-4">
+                <p className="font-bold text-stone-400 tracking-wider text-[10px] uppercase mb-1">{t.infoLabels.hours}</p>
+                <p className="text-stone-700">{dummyInfo.hours}</p>
               </div>
             </div>
           </div>
-          <div className="overflow-hidden rounded-3xl border border-stone-200/70 bg-white/90 shadow-lg">
+          <div className="overflow-hidden rounded-3xl border border-stone-200/50 bg-white shadow-2xl">
             <iframe
               title="Google Map"
               src={mapUrl}
-              className="h-80 w-full border-0 md:h-96"
+              className="h-80 w-full border-0 md:h-96 grayscale hover:grayscale-0 transition-all duration-1000"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

@@ -112,9 +112,9 @@ export const translations = {
       choose: "このプランを選ぶ",
       consult: "制作相談・お見積り（無料）",
       customPlans: [
-        { title: "オーダーメイド 基本", price: "¥150,000〜" },
-        { title: "オーダーメイド 拡張", price: "¥300,000〜" },
-        { title: "オーダーメイド 戦略設計", price: "¥500,000〜" },
+        { title: "オーダーメイド 基本", price: "150,000円 / 毎月〜" },
+        { title: "オーダーメイド 拡張", price: "300,000円 / 毎月〜" },
+        { title: "オーダーメイド 戦略設計", price: "500,000円 / 毎月〜" },
       ],
     },
     // Works
@@ -838,7 +838,7 @@ export const translations = {
           line: "公式LINE",
           subscribe: "ライトプランに申し込む",
         },
-        note: "※このサイトはライトプラン（月額2,980円）の標準機能のみで制作されています",
+        note: "※このサイトはライトプラン（2,980円 / 毎月）の標準機能のみで制作されています",
         updatedAtFallback: "更新日未定",
         fallbackSite: {
           name: "山霞温泉 そよ風の宿",
@@ -936,7 +936,7 @@ export const translations = {
           line: "公式LINE",
           subscribe: "スタンダードプランに申し込む",
         },
-        note: "※このサイトはスタンダードプラン（月額4,980円）の標準機能で制作されています",
+        note: "※このサイトはスタンダードプラン（4,980円 / 毎月）の標準機能で制作されています",
         updatedAtFallback: "更新日未定",
         fallbackSite: {
           name: "山霞温泉 そよ風の宿",
@@ -1031,7 +1031,7 @@ export const translations = {
           line: "公式LINE",
           subscribe: "プロプランに申し込む",
         },
-        note: "※このサイトはプロプラン（月額8,000円〜）の標準機能で制作されています",
+        note: "※このサイトはプロプラン（8,000円 / 毎月〜）の標準機能で制作されています",
         updatedAtFallback: "更新日未定",
         fallbackSite: {
           name: "山霞温泉 そよ風の宿",
@@ -1255,9 +1255,9 @@ export const translations = {
       choose: "Choose this plan",
       consult: "Consultation & Quote (Free)",
       customPlans: [
-        { title: "Custom Basic", price: "¥150,000〜" },
-        { title: "Custom Extended", price: "¥300,000〜" },
-        { title: "Custom Strategy", price: "¥500,000〜" },
+        { title: "Custom Basic", price: "150,000 JPY / Monthly〜" },
+        { title: "Custom Extended", price: "300,000 JPY / Monthly〜" },
+        { title: "Custom Strategy", price: "500,000 JPY / Monthly〜" },
       ],
     },
     // Works

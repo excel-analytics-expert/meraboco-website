@@ -69,10 +69,13 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
                     className="glass-card-light group rounded-2xl border border-white/20 bg-white/10 px-6 py-6 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50"
                   >
                     <div className="text-sm font-semibold tracking-[0.3em] text-stone-400">
-                            {getPlanName(plan)}
+                      {getPlanName(plan)}
                     </div>
-                    <div className="mt-2 text-4xl font-medium text-white transition-colors duration-300 group-hover:text-blue-200">
-                      {plan.monthlyPrice}
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-4xl font-medium text-white transition-colors duration-300 group-hover:text-blue-200">
+                        {plan.monthlyPrice}
+                      </span>
+                      <span className="text-sm text-stone-300/80">円 / 毎月</span>
                     </div>
                     <div className="mt-1 text-xs text-stone-500">
                       {copy.initialCost} {plan.initialCost}
@@ -112,10 +115,13 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
               {!showEmpty && proPlan && smartPlans.every((plan) => plan.id !== proPlan.id) && (
                 <div className="glass-card-light group rounded-2xl border border-white/20 bg-white/10 px-6 py-6 shadow-xl backdrop-blur-2xl transition-all duration-500 hover:-translate-y-2 hover:border-blue-400/50">
                   <div className="text-sm font-semibold tracking-[0.3em] text-stone-400">
-                           {getPlanName(proPlan)}
+                    {getPlanName(proPlan)}
                   </div>
-                  <div className="mt-2 text-4xl font-medium text-white transition-colors duration-300 group-hover:text-blue-200">
-                    {proPlan.monthlyPrice}
+                  <div className="mt-2 flex items-baseline gap-1">
+                    <span className="text-4xl font-medium text-white transition-colors duration-300 group-hover:text-blue-200">
+                      {proPlan.monthlyPrice}
+                    </span>
+                    <span className="text-sm text-stone-300/80">円 / 毎月</span>
                   </div>
                   <div className="mt-1 text-xs text-stone-500">
                     {copy.initialCost} {proPlan.initialCost}

@@ -112,9 +112,9 @@ export const translations = {
       choose: "このプランを選ぶ",
       consult: "制作相談・お見積り（無料）",
       customPlans: [
-        { title: "オーダーメイド 基本", price: "150,000円 / 毎月〜" },
-        { title: "オーダーメイド 拡張", price: "300,000円 / 毎月〜" },
-        { title: "オーダーメイド 戦略設計", price: "500,000円 / 毎月〜" },
+        { title: "オーダーメイド 基本", price: "150,000円〜" },
+        { title: "オーダーメイド 拡張", price: "300,000円〜" },
+        { title: "オーダーメイド 戦略設計", price: "500,000円〜" },
       ],
     },
     // Works
@@ -1255,9 +1255,9 @@ export const translations = {
       choose: "Choose this plan",
       consult: "Consultation & Quote (Free)",
       customPlans: [
-        { title: "Custom Basic", price: "150,000 JPY / Monthly〜" },
-        { title: "Custom Extended", price: "300,000 JPY / Monthly〜" },
-        { title: "Custom Strategy", price: "500,000 JPY / Monthly〜" },
+        { title: "Custom Basic", price: "150,000 JPY〜" },
+        { title: "Custom Extended", price: "300,000 JPY〜" },
+        { title: "Custom Strategy", price: "500,000 JPY〜" },
       ],
     },
     // Works

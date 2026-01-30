@@ -179,7 +179,7 @@ export function LocalBusinessStructuredData() {
     "@id": "https://meraboco.jp",
     url: "https://meraboco.jp",
     telephone: "050-1793-1290",
-    email: "meraboco.2025.8@gmail.com",
+    email: "info@meraboco.jp",
     priceRange: "$$",
     address: {
       "@type": "PostalAddress",

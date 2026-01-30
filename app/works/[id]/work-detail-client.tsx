@@ -2,241 +2,247 @@
 
 import Header from "@/components/header"
 import Footer from "@/components/footer"
-import { useLanguage } from "@/contexts/language-context"
 import Link from "next/link"
 import Image from "next/image"
+import { useLanguage } from "@/contexts/language-context"
 
-type WorkData = {
-    category: string
-    title: string
-    client: string
-    period: string
-    image: string
-    description: string
-    challenge: string
-    solution: string
-    result: string[]
-    technologies: string[]
-    url?: string
-    googleRating?: number
-    googleReviews?: number
-    seoMetrics?: {
-        label: string
-        value: string
-        status: "excellent" | "good" | "average"
-    }[]
+type SeoMetric = {
+  label: string
+  labelEn?: string
+  value: string
+  status: "excellent" | "good" | "average"
 }
 
-type Props = {
-    id: string
-    workJa: WorkData
-    workEn: WorkData
+type WorkDetail = {
+  category: string
+  categoryEn?: string
+  title: string
+  titleEn?: string
+  client: string
+  clientEn?: string
+  period: string
+  periodEn?: string
+  image: string
+  description: string
+  descriptionEn?: string
+  challenge: string
+  challengeEn?: string
+  solution: string
+  solutionEn?: string
+  result: string[]
+  resultEn?: string[]
+  technologies: string[]
+  technologiesEn?: string[]
+  url?: string
+  googleRating?: number
+  googleReviews?: number
+  seoMetrics?: SeoMetric[]
 }
 
-export default function WorkDetailClient({ id, workJa, workEn }: Props) {
-    const { language } = useLanguage()
-    const work = language === "ja" ? workJa : workEn
+type WorkDetailClientProps = {
+  work: WorkDetail
+}
 
-    const labels =
-        language === "ja"
-            ? {
-                client: "クライアント",
-                period: "期間",
-                googleRating: "Google評価",
-                reviews: "件",
-                projectOverview: "プロジェクト概要",
-                challenge: "課題",
-                solution: "ソリューション",
-                results: "成果",
-                technologies: "使用技術",
-                visitSite: "サイトを見る",
-                backToWorks: "実績一覧に戻る",
-                contact: "お問い合わせ",
-                ctaTitle: "同様のプロジェクトをご検討ですか？",
-                ctaText: "お気軽にご相談ください。無料でお見積りいたします。",
-            }
-            : {
-                client: "Client",
-                period: "Period",
-                googleRating: "Google Rating",
-                reviews: "reviews",
-                projectOverview: "Project Overview",
-                challenge: "Challenge",
-                solution: "Solution",
-                results: "Results",
-                technologies: "Technologies Used",
-                visitSite: "Visit Site",
-                backToWorks: "Back to Portfolio",
-                contact: "Contact Us",
-                ctaTitle: "Considering a similar project?",
-                ctaText: "Feel free to contact us. Free estimates available.",
-            }
+export default function WorkDetailClient({ work }: WorkDetailClientProps) {
+  const { language, translations } = useLanguage()
+  const isJa = language === "ja"
+  const t = translations[language].workDetail
 
-    return (
-        <>
-            <Header />
-            <main className="pt-20">
-                <section className="py-12 md:py-16">
-                    <div className="container mx-auto px-4">
-                        {/* 変更点: bg-white/90 を bg-white/80 に変更 */}
-                        <div className="max-w-4xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-                            <div className="mb-6">
-                                <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
-                                    {work.category}
-                                </span>
-                            </div>
-                            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">{work.title}</h1>
-                            <div className="flex flex-wrap gap-6 text-gray-600">
-                                <div>
-                                    <span className="font-semibold">{labels.client}:</span> {work.client}
-                                </div>
-                                <div>
-                                    <span className="font-semibold">{labels.period}:</span> {work.period}
-                                </div>
-                            </div>
-                            {work.googleRating && (
-                                // ここはカード内のカードなので透明度を少し下げてバランスを取ります（bg-white/80 -> bg-white/60）
-                                <div className="mt-6 flex items-center gap-4 bg-white/60 p-4 rounded-lg shadow-sm border border-gray-100">
-                                    <div className="flex items-center gap-2">
-                                        <span className="text-3xl font-bold text-yellow-500">{work.googleRating}</span>
-                                        <div>
-                                            <div className="flex gap-1">
-                                                {[...Array(5)].map((_, i) => (
-                                                    <i
-                                                        key={i}
-                                                        className={`fas fa-star ${i < Math.floor(work.googleRating!) ? "text-yellow-500" : "text-gray-300"}`}
-                                                    ></i>
-                                                ))}
-                                            </div>
-                                            <span className="text-sm text-gray-600">
-                                                {labels.googleRating} ({work.googleReviews}
-                                                {labels.reviews})
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
+  const statusLabel = (status: SeoMetric["status"]) => {
+    const labels = t.statusLabels || {}
+    return labels[status] || status
+  }
+
+  return (
+    <>
+      <Header />
+      <main className="pt-20">
+        <section className="bg-gradient-to-br from-blue-50 to-indigo-50 py-16 md:py-24">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <div className="mb-6">
+                <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  {isJa ? work.category : work.categoryEn ?? work.category}
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-balance">
+                {isJa ? work.title : work.titleEn ?? work.title}
+              </h1>
+              <div className="flex flex-wrap gap-6 text-gray-600">
+                <div>
+                  <span className="font-semibold">{t.clientLabel}:</span>{" "}
+                  {isJa ? work.client : work.clientEn ?? work.client}
+                </div>
+                <div>
+                  <span className="font-semibold">{t.periodLabel}:</span>{" "}
+                  {isJa ? work.period : work.periodEn ?? work.period}
+                </div>
+              </div>
+              {work.googleRating && (
+                <div className="mt-6 flex items-center gap-4 bg-white p-4 rounded-lg shadow-md">
+                  <div className="flex items-center gap-2">
+                    <span className="text-3xl font-bold text-yellow-500">{work.googleRating}</span>
+                    <div>
+                      <div className="flex gap-1">
+                        {[...Array(5)].map((_, i) => (
+                          <i
+                            key={i}
+                            className={`fas fa-star ${i < Math.floor(work.googleRating!) ? "text-yellow-500" : "text-gray-300"}`}
+                          ></i>
+                        ))}
+                      </div>
+                      <p className="text-sm text-gray-600">
+                        {t.googleRatingLabel} ({work.googleReviews}{isJa ? "件" : ""})
+                      </p>
                     </div>
-                </section>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
 
-                <section className="pb-16 md:pb-24">
-                    <div className="container mx-auto px-4">
-                        <div className="max-w-4xl mx-auto">
-                            <div className="mb-12">
-                                <Image
-                                    src={work.image || "/placeholder.svg"}
-                                    alt={work.title}
-                                    width={1200}
-                                    height={675}
-                                    className="w-full rounded-xl shadow-2xl"
-                                />
-                            </div>
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <div className="max-w-5xl mx-auto">
+              <div className="relative h-96 rounded-lg overflow-hidden shadow-2xl mb-16">
+                <Image
+                  src={work.image || "/placeholder.svg"}
+                  alt={isJa ? work.title : work.titleEn ?? work.title}
+                  width={1200}
+                  height={800}
+                  className="w-full h-full object-cover"
+                />
+              </div>
 
-                            {work.seoMetrics && (
-                                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                                    {work.seoMetrics.map((metric) => (
-                                        // 変更点: bg-*-50/90 を bg-*-50/80 に変更
-                                        <div
-                                            key={metric.label}
-                                            className={`p-4 rounded-lg text-center backdrop-blur-sm shadow-sm ${metric.status === "excellent"
-                                                ? "bg-green-50/80 border border-green-200"
-                                                : metric.status === "good"
-                                                    ? "bg-blue-50/80 border border-blue-200"
-                                                    : "bg-gray-50/80 border border-gray-200"
-                                                }`}
-                                        >
-                                            <div
-                                                className={`text-2xl font-bold ${metric.status === "excellent"
-                                                    ? "text-green-600"
-                                                    : metric.status === "good"
-                                                        ? "text-blue-600"
-                                                        : "text-gray-600"
-                                                    }`}
-                                            >
-                                                {metric.value}
-                                            </div>
-                                            <div className="text-sm text-gray-600">{metric.label}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-
-                            {/* 変更点: bg-white/90 を bg-white/80 に変更 */}
-                            <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg">
-                                <div className="prose prose-lg max-w-none">
-                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.projectOverview}</h2>
-                                    <p className="text-gray-600 leading-relaxed mb-8">{work.description}</p>
-
-                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.challenge}</h2>
-                                    <p className="text-gray-600 leading-relaxed mb-8">{work.challenge}</p>
-
-                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.solution}</h2>
-                                    <p className="text-gray-600 leading-relaxed mb-8">{work.solution}</p>
-
-                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.results}</h2>
-                                    <ul className="space-y-3 mb-8">
-                                        {work.result.map((item, index) => (
-                                            <li key={index} className="flex items-start gap-3">
-                                                <i className="fas fa-check-circle text-green-500 mt-1"></i>
-                                                <span className="text-gray-600">{item}</span>
-                                            </li>
-                                        ))}
-                                    </ul>
-
-                                    <h2 className="text-2xl font-bold mb-4 text-gray-900">{labels.technologies}</h2>
-                                    <div className="flex flex-wrap gap-2 mb-8">
-                                        {work.technologies.map((tech) => (
-                                            <span
-                                                key={tech}
-                                                className="bg-gray-100 text-gray-700 px-4 py-2 rounded-full text-sm font-medium"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
-                                    </div>
-
-                                    {work.url && (
-                                        <div className="mt-8">
-                                            <a
-                                                href={work.url}
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
-                                            >
-                                                <i className="fas fa-external-link-alt"></i>
-                                                {labels.visitSite}
-                                            </a>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
+              {work.seoMetrics && (
+                <div className="mb-16">
+                  <h2 className="text-3xl font-bold mb-6">{t.siteScores}</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {work.seoMetrics.map((metric, index) => (
+                      <div
+                        key={index}
+                        className={`p-6 rounded-lg border-l-4 ${
+                          metric.status === "excellent"
+                            ? "bg-green-50 border-green-600"
+                            : metric.status === "good"
+                              ? "bg-blue-50 border-blue-600"
+                              : "bg-yellow-50 border-yellow-600"
+                        }`}
+                      >
+                        <div className="flex justify-between items-center">
+                          <span className="font-semibold text-gray-800">
+                            {isJa ? metric.label : metric.labelEn ?? metric.label}
+                          </span>
+                          <span className="text-2xl font-bold text-gray-900">{metric.value}</span>
                         </div>
-                    </div>
-                </section>
-
-                <section className="bg-blue-600 text-white py-16">
-                    <div className="container mx-auto px-4 text-center">
-                        <h2 className="text-3xl font-bold mb-6">{labels.ctaTitle}</h2>
-                        <p className="text-lg mb-8 text-blue-100">{labels.ctaText}</p>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <Link
-                                href="/#contact"
-                                className="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold hover:bg-blue-50 transition-colors"
-                            >
-                                {labels.contact}
-                            </Link>
-                            <Link
-                                href="/works"
-                                className="inline-block border-2 border-white text-white px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition-colors"
-                            >
-                                {labels.backToWorks}
-                            </Link>
+                        <div className="mt-2">
+                          <span
+                            className={`text-sm font-semibold ${
+                              metric.status === "excellent"
+                                ? "text-green-600"
+                                : metric.status === "good"
+                                  ? "text-blue-600"
+                                  : "text-yellow-600"
+                            }`}
+                          >
+                            {statusLabel(metric.status)}
+                          </span>
                         </div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-sm text-gray-600 mt-4">{t.scoresNote}</p>
+                </div>
+              )}
+
+              <div className="prose prose-lg max-w-none mb-16">
+                <h2 className="text-3xl font-bold mb-4">{t.overview}</h2>
+                <p className="text-gray-600 leading-relaxed">
+                  {isJa ? work.description : work.descriptionEn ?? work.description}
+                </p>
+              </div>
+
+              <div className="mb-16">
+                <h2 className="text-3xl font-bold mb-6">{t.challenges}</h2>
+                <div className="bg-red-50 border-l-4 border-red-600 p-6 rounded-lg">
+                  <p className="text-gray-700 leading-relaxed">
+                    {isJa ? work.challenge : work.challengeEn ?? work.challenge}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mb-16">
+                <h2 className="text-3xl font-bold mb-6">{t.solutions}</h2>
+                <div className="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg">
+                  <p className="text-gray-700 leading-relaxed">
+                    {isJa ? work.solution : work.solutionEn ?? work.solution}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mb-16">
+                <h2 className="text-3xl font-bold mb-6">{t.results}</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {(isJa ? work.result : work.resultEn ?? work.result).map((item, index) => (
+                    <div key={index} className="bg-green-50 p-6 rounded-lg border-l-4 border-green-600">
+                      <p className="font-semibold text-gray-800 flex items-start gap-2">
+                        <i className="fas fa-check-circle text-green-600 mt-1"></i>
+                        {item}
+                      </p>
                     </div>
-                </section>
-            </main>
-            <Footer />
-        </>
-    )
+                  ))}
+                </div>
+              </div>
+
+              <div className="mb-16">
+                <h2 className="text-3xl font-bold mb-6">{t.technologies}</h2>
+                <div className="flex flex-wrap gap-3">
+                  {(isJa ? work.technologies : work.technologiesEn ?? work.technologies).map((tech) => (
+                    <span key={tech} className="bg-gray-800 text-white px-4 py-2 rounded-full font-semibold">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {work.url && (
+                <div className="text-center mb-16">
+                  <a
+                    href={work.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg font-bold hover:bg-blue-700 transition-colors"
+                  >
+                    {t.visitSite} <i className="fas fa-external-link-alt ml-2"></i>
+                  </a>
+                </div>
+              )}
+
+              <div className="border-t pt-8">
+                <Link href="/works" className="text-blue-600 hover:underline font-semibold flex items-center gap-2">
+                  <i className="fas fa-arrow-left"></i>
+                  {t.backToWorks}
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-blue-600 text-white py-16">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-6">{t.ctaTitle}</h2>
+            <p className="text-lg mb-8 text-blue-100">{t.ctaSubtitle}</p>
+            <Link
+              href="/#contact"
+              className="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold hover:bg-blue-50 transition-colors"
+            >
+              {t.ctaButton}
+            </Link>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
 }

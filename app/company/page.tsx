@@ -28,7 +28,7 @@ export default function CompanyPage() {
                 <div className="mb-8 border-none">
                   <img
                     src="/assets/logo.png"
-                    alt="メラボコ ロゴ"
+                    alt={language === "ja" ? "メラボコ ロゴ" : "Meraboco Logo"}
                     className="w-40 h-40 md:w-48 md:h-48 object-contain mx-auto border-none"
                   />
                 </div>
@@ -54,7 +54,7 @@ export default function CompanyPage() {
                       <th className="bg-gray-50 p-4 md:p-6 text-left font-semibold w-1/3">
                         {t("companyPage.info.tradeName")}
                       </th>
-                      <td className="p-4 md:p-6">メラボコ</td>
+                      <td className="p-4 md:p-6">{language === "ja" ? "メラボコ" : "Meraboco"}</td>
                     </tr>
                     <tr className="border-b">
                       <th className="bg-gray-50 p-4 md:p-6 text-left font-semibold">
@@ -97,8 +97,8 @@ export default function CompanyPage() {
                     <tr>
                       <th className="bg-gray-50 p-4 md:p-6 text-left font-semibold">{t("companyPage.info.email")}</th>
                       <td className="p-4 md:p-6">
-                        <a href="mailto:meraboco.2025.8@gmail.com" className="text-blue-600 hover:underline">
-                          meraboco.2025.8@gmail.com
+                        <a href="mailto:info@meraboco.jp" className="text-blue-600 hover:underline">
+                          info@meraboco.jp
                         </a>
                       </td>
                     </tr>

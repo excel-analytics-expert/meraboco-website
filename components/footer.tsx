@@ -10,7 +10,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="bg-gray-900 text-white pt-16 md:pt-24 pb-16 mt-12 md:mt-24 border-t-8 border-gray-800"
+      className="bg-gray-900 text-white pt-24 pb-16 mt-24 border-t-8 border-gray-800"
       style={{ isolation: "isolate" }}
     >
       <div className="container mx-auto px-4">
@@ -125,7 +125,7 @@ export default function Footer() {
                   {footerData.phone}
                 </a>
               </p>
-              <p className="mb-4">MAIL: meraboco.2025.8@gmail.com</p>
+              <p className="mb-4">MAIL: info@meraboco.jp</p>
               <p className="text-xs text-gray-400 leading-relaxed border-l-2 border-gray-600 pl-3">
                 {footerData.aiNotice}
               </p>
@@ -141,18 +141,18 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/terms"
+                  href="/commerce"
                   className="hover:text-gray-300 hover:translate-x-2 inline-block transition-all duration-300"
                 >
-                  {footerData.terms}
+                  特定商取引法に基づく表記
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/law"
+                  href="/terms"
                   className="hover:text-gray-300 hover:translate-x-2 inline-block transition-all duration-300"
                 >
-                  {footerData.law}
+                  {footerData.terms}
                 </Link>
               </li>
             </ul>

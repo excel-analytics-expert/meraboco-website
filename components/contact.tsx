@@ -1,33 +1,49 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, useRef, type FormEvent } from "react"
 import { useLanguage } from "@/contexts/language-context"
-import Link from "next/link"
 
 export default function Contact() {
-  const { t } = useLanguage()
+  const { language, translations } = useLanguage()
+  const contactData = translations[language].contact
+  const inquiryNotice =
+    language === "ja"
+      ? "現在、お申し込みが集中しており、決済システムを最終調整中です。スマートプランのお申し込みをご希望の方は、本フォームよりその旨をお知らせください。優先的にご案内いたします。"
+      : "We are currently seeing high demand and finalizing the payment system. If you wish to apply for a Smart Plan, please mention it in this form and we will prioritize your request."
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    company: "",
     message: "",
   })
-  const [privacyAgreed, setPrivacyAgreed] = useState(false)
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
-  const [errorMessage, setErrorMessage] = useState("")
+  const [formMessage, setFormMessage] = useState("")
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle")
+  const [isVisible, setIsVisible] = useState(false)
+  const sectionRef = useRef<HTMLElement>(null)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+        }
+      },
+      { threshold: 0.2 },
+    )
 
-    if (!privacyAgreed) {
-      setStatus("error")
-      setErrorMessage("プライバシーポリシーに同意してください")
-      return
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
     }
 
-    setStatus("loading")
-    setErrorMessage("")
+    return () => observer.disconnect()
+  }, [])
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setFormStatus("sending")
+    setFormMessage(contactData.form.sending)
 
     try {
       const response = await fetch("/api/contact", {
@@ -35,25 +51,41 @@ export default function Contact() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          privacyAgreed,
-        }),
+        body: JSON.stringify(formData),
       })
 
       const data = await response.json()
 
       if (response.ok) {
-        setStatus("success")
-        setFormData({ name: "", email: "", message: "" })
-        setPrivacyAgreed(false)
+        setFormStatus("success")
+        setFormMessage(contactData.form.success)
+        setFormData({ name: "", email: "", company: "", message: "" })
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => {
+          setFormMessage("")
+          setFormStatus("idle")
+        }, 5000)
       } else {
-        setStatus("error")
-        setErrorMessage(data.error || "送信に失敗しました")
+        setFormStatus("error")
+        setFormMessage(data.error || contactData.form.error)
+        
+        // Clear error message after 5 seconds
+        setTimeout(() => {
+          setFormMessage("")
+          setFormStatus("idle")
+        }, 5000)
       }
     } catch (error) {
-      setStatus("error")
-      setErrorMessage("ネットワークエラーが発生しました")
+      console.error("Contact form error:", error)
+      setFormStatus("error")
+      setFormMessage(contactData.form.error)
+      
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        setFormMessage("")
+        setFormStatus("idle")
+      }, 5000)
     }
   }
 
@@ -65,60 +97,77 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="pt-20 pb-48 md:py-32 relative">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="py-32 md:py-40 relative bg-transparent mt-24 mb-24"
+      style={{ isolation: "isolate" }}
+    >
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div
+          className={`text-center mb-20 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         >
-          <span className="text-blue-400 font-semibold tracking-wider">{t("contact.heading")}</span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 text-white">{t("contact.subheading")}</h2>
-          <p className="text-gray-300 mt-6 max-w-2xl mx-auto">{t("contact.description")}</p>
-        </motion.div>
+          <p className="text-xs font-semibold tracking-[0.35em] text-blue-300/80">
+            {contactData.heading}
+          </p>
+          <h2 className="mt-3 text-4xl md:text-6xl font-semibold text-white">
+            {contactData.subheading}
+          </h2>
+          <p className="mt-6 text-base text-white/70 font-light max-w-2xl mx-auto">
+            {contactData.description}
+          </p>
+        </div>
 
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-                <h3 className="text-xl font-bold text-white mb-6">{t("contact.phoneLabel")}</h3>
+        <div
+          className={`mx-auto mb-10 max-w-3xl transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          style={{ transitionDelay: "150ms" }}
+        >
+          <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-6 text-left shadow-xl">
+            <p className="text-sm leading-relaxed text-white/80">{inquiryNotice}</p>
+          </div>
+        </div>
 
-                <a
-                  href={`tel:${t("contact.phone")}`}
-                  className="text-3xl font-bold text-blue-400 hover:text-blue-300 transition-colors"
-                >
-                  {t("contact.phone")}
-                </a>
-                <p className="text-gray-400 mt-4 text-sm">{t("contact.aiNotice")}</p>
+        <div className="grid gap-8 md:grid-cols-[0.9fr_1.1fr] md:items-start">
+          <div
+            className={`space-y-8 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+            style={{ transitionDelay: "200ms" }}
+          >
+            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-8 text-left shadow-xl">
+              <h3 className="text-lg font-semibold mb-4 text-white/90">{contactData.phoneLabel}</h3>
+              <a
+                href="tel:050-1793-1290"
+                className="inline-flex items-center gap-3 text-3xl md:text-4xl font-bold text-blue-400 hover:text-blue-300 transition-colors duration-300"
+              >
+                <i className="fas fa-phone-volume"></i>
+                {contactData.phone}
+              </a>
+              <p className="text-sm text-white/60 mt-4 leading-relaxed">{contactData.aiNotice}</p>
+            </div>
+            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-8 text-left shadow-xl">
+              <h3 className="text-lg font-semibold mb-4 text-white/90">
+                {language === "ja" ? "営業時間" : "Business Hours"}
+              </h3>
+              <div className="text-sm text-white/70 space-y-2">
+                <p>{language === "ja" ? "平日 9:00 - 18:00" : "Weekdays 9:00 - 18:00"}</p>
+                <p>{language === "ja" ? "土日祝日はお休みをいただいております" : "Closed on weekends and holidays"}</p>
               </div>
+            </div>
+          </div>
 
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
-                <h3 className="text-xl font-bold text-white mb-4">営業時間</h3>
-                <p className="text-gray-300">平日 9:00 - 18:00</p>
-                <p className="text-gray-400 text-sm mt-2">土日祝日はお休みをいただいております</p>
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
+          <div
+            className={`transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+            style={{ transitionDelay: "300ms" }}
+          >
+            <div className="glass-card-light rounded-3xl border border-white/20 bg-white/10 backdrop-blur-2xl p-8 md:p-12 shadow-xl">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="name" className="block text-white font-medium mb-2">
-                    {t("contact.form.name")} <span className="text-red-400">*</span>
+                <div className="group">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium mb-3 text-white/80 transition-colors duration-300 group-focus-within:text-blue-300"
+                  >
+                    {contactData.form.name}
+                    <span className="text-red-500 ml-1">*</span>
                   </label>
                   <input
                     type="text"
@@ -126,15 +175,22 @@ export default function Contact() {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    placeholder={t("contact.form.namePlaceholder")}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                    minLength={2}
+                    maxLength={100}
+                    autoComplete="name"
+                    placeholder={contactData.form.namePlaceholder}
+                    className="w-full px-6 py-4 border border-white/20 rounded-2xl bg-white/10 text-white placeholder-white/50 outline-none transition-all duration-300 hover:border-white/40 focus:ring-2 focus:ring-blue-400/60 focus:border-blue-400/60"
+                    disabled={formStatus === "sending"}
                   />
                 </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-white font-medium mb-2">
-                    {t("contact.form.email")} <span className="text-red-400">*</span>
+                <div className="group">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-3 text-white/80 transition-colors duration-300 group-focus-within:text-blue-300"
+                  >
+                    {contactData.form.email}
+                    <span className="text-red-500 ml-1">*</span>
                   </label>
                   <input
                     type="email"
@@ -142,72 +198,108 @@ export default function Contact() {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    placeholder={t("contact.form.emailPlaceholder")}
                     required
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors"
+                    maxLength={254}
+                    autoComplete="email"
+                    placeholder={contactData.form.emailPlaceholder}
+                    className="w-full px-6 py-4 border border-white/20 rounded-2xl bg-white/10 text-white placeholder-white/50 outline-none transition-all duration-300 hover:border-white/40 focus:ring-2 focus:ring-blue-400/60 focus:border-blue-400/60"
+                    disabled={formStatus === "sending"}
                   />
                 </div>
-
-                <div>
-                  <label htmlFor="message" className="block text-white font-medium mb-2">
-                    {t("contact.form.message")} <span className="text-red-400">*</span>
+                <div className="group">
+                  <label
+                    htmlFor="company"
+                    className="block text-sm font-medium mb-3 text-white/80 transition-colors duration-300 group-focus-within:text-blue-300"
+                  >
+                    {language === "ja" ? "会社名" : "Company"}
+                  </label>
+                  <input
+                    type="text"
+                    id="company"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleChange}
+                    maxLength={200}
+                    autoComplete="organization"
+                    className="w-full px-6 py-4 border border-white/20 rounded-2xl bg-white/10 text-white placeholder-white/50 outline-none transition-all duration-300 hover:border-white/40 focus:ring-2 focus:ring-blue-400/60 focus:border-blue-400/60"
+                    disabled={formStatus === "sending"}
+                  />
+                </div>
+                <div className="group">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-3 text-white/80 transition-colors duration-300 group-focus-within:text-blue-300"
+                  >
+                    {contactData.form.message}
+                    <span className="text-red-500 ml-1">*</span>
                   </label>
                   <textarea
                     id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    placeholder={t("contact.form.messagePlaceholder")}
-                    required
                     rows={6}
-                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors resize-none"
+                    required
+                    minLength={10}
+                    maxLength={5000}
+                    placeholder={contactData.form.messagePlaceholder}
+                    className="w-full px-6 py-4 border border-white/20 rounded-2xl bg-white/10 text-white placeholder-white/50 outline-none transition-all duration-300 resize-none hover:border-white/40 focus:ring-2 focus:ring-blue-400/60 focus:border-blue-400/60"
+                    disabled={formStatus === "sending"}
                   />
                 </div>
-
-                {/* Privacy Policy Checkbox */}
-                <div className="flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    id="privacy"
-                    checked={privacyAgreed}
-                    onChange={(e) => setPrivacyAgreed(e.target.checked)}
-                    className="mt-1 w-5 h-5 rounded border-white/20 bg-white/10 text-blue-500 focus:ring-blue-400 focus:ring-offset-0 cursor-pointer"
-                  />
-                  <label htmlFor="privacy" className="text-gray-300 text-sm cursor-pointer">
-                    <Link href="/privacy" className="text-blue-400 hover:text-blue-300 underline" target="_blank">
-                      プライバシーポリシー
-                    </Link>
-                    に同意する <span className="text-red-400">*</span>
-                  </label>
+                <div className="text-center pt-4">
+                  <button
+                    type="submit"
+                    disabled={formStatus === "sending"}
+                    className="w-full px-12 py-4 rounded-full bg-white/20 text-white border border-white/20 hover:bg-blue-600 hover:scale-105 hover:shadow-2xl transition-all duration-500 font-medium text-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+                  >
+                    {formStatus === "sending" ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                        </svg>
+                        {contactData.form.sending}
+                      </span>
+                    ) : (
+                      contactData.form.submit
+                    )}
+                  </button>
                 </div>
-
-                {/* Status Messages */}
-                {status === "success" && (
-                  <div className="bg-green-500/20 border border-green-500/50 rounded-lg p-4 text-green-300">
-                    {t("contact.form.success")}
-                  </div>
-                )}
-
-                {status === "error" && (
-                  <div className="bg-red-500/20 border border-red-500/50 rounded-lg p-4 text-red-300">
-                    {errorMessage || t("contact.form.error")}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={status === "loading" || !privacyAgreed}
-                  className={`w-full py-4 rounded-lg font-bold text-lg transition-all ${status === "loading" || !privacyAgreed
-                    ? "bg-gray-500 cursor-not-allowed text-gray-300"
-                    : "bg-blue-600 hover:bg-blue-700 text-white"
-                    }`}
-                >
-                  {status === "loading" ? t("contact.form.sending") : t("contact.form.submit")}
-                </button>
               </form>
-            </motion.div>
+            </div>
           </div>
         </div>
+
+        {formMessage && (
+          <div className="mt-10 text-center">
+            <p
+              className={`font-medium glass-card-light border border-white/20 bg-white/10 backdrop-blur-2xl py-4 px-6 rounded-2xl inline-block animate-fade-in ${
+                formStatus === "success" ? "text-emerald-300" : 
+                formStatus === "error" ? "text-red-300" : 
+                "text-blue-300"
+              }`}
+            >
+              {formStatus === "success" && (
+                <span className="inline-flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {formMessage}
+                </span>
+              )}
+              {formStatus === "error" && (
+                <span className="inline-flex items-center gap-2">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  {formMessage}
+                </span>
+              )}
+              {formStatus === "sending" && formMessage}
+            </p>
+          </div>
+        )}
       </div>
     </section>
   )

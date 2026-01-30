@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useLanguage } from "@/contexts/language-context"
 
 interface BreadcrumbProps {
   customTitle?: string
@@ -9,24 +10,12 @@ interface BreadcrumbProps {
 
 export function PageBreadcrumb({ customTitle }: BreadcrumbProps) {
   const pathname = usePathname()
+  const { language, translations } = useLanguage()
 
   // パスを分解してパンくずを生成
   const paths = pathname.split("/").filter(Boolean)
 
-  // 日本語のラベルマッピング
-  const labelMap: Record<string, string> = {
-    company: "会社概要",
-    services: "サービス",
-    works: "制作実績",
-    privacy: "プライバシーポリシー",
-    terms: "利用規約",
-    "web-production": "WEB制作",
-    "system-development": "システム開発",
-    "ux-ui-design": "UX/UIデザイン",
-    "digital-marketing": "デジタルマーケティング",
-    consulting: "ITコンサルティング",
-    maintenance: "保守・運用",
-  }
+  const labelMap = translations[language].breadcrumbs || {}
 
   return (
     <nav className="bg-gray-50 py-4 border-b animate-fade-in">
@@ -34,7 +23,7 @@ export function PageBreadcrumb({ customTitle }: BreadcrumbProps) {
         <ol className="flex items-center gap-2 text-sm text-muted-foreground">
           <li>
             <Link href="/" className="hover:text-primary transition-colors duration-200">
-              ホーム
+              {translations[language].header.home}
             </Link>
           </li>
           {paths.map((path, index) => {

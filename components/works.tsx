@@ -118,8 +118,9 @@ export default function Works() {
               ref={(el) => {
                 cardRefs.current[index] = el
               }}
-              className={`transition-all duration-1000 ${visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                }`}
+              className={`transition-all duration-1000 ${
+                visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
               style={{
                 transitionDelay: `${index * 150}ms`,
               }}
@@ -138,13 +139,11 @@ export default function Works() {
                     <h3 className="text-xl font-bold mb-2 transition-colors duration-300 hover:text-blue-600 line-reveal">
                       {language === "ja" ? work.title : work.titleEn}
                       <br />
-                      {/* サブタイトルも少しだけ視認性を高めるため gray-600 -> gray-800 へ */}
-                      <span className="text-base font-normal text-gray-800">
+                      <span className="text-base font-normal text-gray-600">
                         {language === "ja" ? work.subtitle : work.subtitleEn}
                       </span>
                     </h3>
-                    {/* 【改善箇所】説明文の文字を真っ黒(gray-950)にし、太さを標準(normal)に変更 */}
-                    <p className="text-gray-950 leading-relaxed font-normal">
+                    <p className="text-gray-700 leading-relaxed font-light">
                       {language === "ja" ? work.description : work.descriptionEn}
                     </p>
                   </div>

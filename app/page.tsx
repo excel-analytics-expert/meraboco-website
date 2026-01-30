@@ -7,24 +7,44 @@ import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 import SEOEnhancer from "@/components/seo-enhancer"
 import ParallaxSection from "@/components/parallax-section"
-import Pricing from "@/components/pricing" // Added import for Pricing component
+import SmartPlanSection from "@/components/smart-plan-section"
+import { microcmsClient } from "@/lib/microcms"
+import type { MicroCmsPricingPlan } from "@/types/microcms"
 
-export default function Home() {
+export default async function Home() {
+  let plans: MicroCmsPricingPlan[] = []
+  let plansError = false
+
+  try {
+    if (process.env.MICROCMS_SERVICE_DOMAIN && process.env.MICROCMS_API_KEY) {
+      const data = await microcmsClient.getList<MicroCmsPricingPlan>({
+        endpoint: "plans",
+        queries: { limit: 3, orders: "createdAt" },
+      })
+      plans = data.contents
+    } else {
+      plansError = true
+    }
+  } catch (err) {
+    console.error("Home plans Fetch Error:", err)
+    plansError = true
+  }
+
   return (
     <>
       <SEOEnhancer />
       <Header />
       <main>
-        <HeroSlider />
+        <section className="bg-[#FDFCFB]">
+          <HeroSlider />
+        </section>
         <ParallaxSection speed={0.3}>
           <About />
         </ParallaxSection>
-        <ParallaxSection speed={0.4}>
+        <ParallaxSection speed={0} enableFade={false}>
           <Services />
         </ParallaxSection>
-        <ParallaxSection speed={0.35}>
-          <Pricing />
-        </ParallaxSection>
+        <SmartPlanSection plans={plans} hasError={plansError} />
         <ParallaxSection speed={0.3}>
           <Works />
         </ParallaxSection>

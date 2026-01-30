@@ -105,15 +105,16 @@ const Services = () => {
               ref={(el) => {
                 cardRefs.current[index] = el
               }}
-              className={`transition-all duration-1000 ${visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                }`}
+              className={`transition-all duration-1000 ${
+                visibleCards[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
               style={{
                 transitionDelay: `${index * 150}ms`,
                 perspective: "1000px",
               }}
             >
               <Link href={service.href} className="block">
-                <LevitatingCard className="glass-card-light rounded-3xl overflow-hidden h-full">
+                <LevitatingCard className="rounded-3xl overflow-hidden h-full bg-white/95 border border-stone-200/60 shadow-xl">
                   <div className="relative aspect-[4/3] overflow-hidden img-overlay-container">
                     <Image
                       src={service.image || "/placeholder.svg"}
@@ -122,12 +123,11 @@ const Services = () => {
                       className="object-cover"
                     />
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-3 transition-colors duration-300 hover:text-blue-600 line-reveal">
+                  <div className="p-6 bg-white/95">
+                    <h3 className="text-xl font-bold mb-3 text-stone-800 transition-colors duration-300 hover:text-blue-600 line-reveal">
                       {service.title}
                     </h3>
-                    {/* 【改善箇所】色をtext-gray-900（真っ黒に近いグレー）にし、太さをfont-normalに強化 */}
-                    <p className="text-gray-900 leading-relaxed font-normal">{service.description}</p>
+                    <p className="text-stone-600 leading-relaxed font-light">{service.description}</p>
                   </div>
                 </LevitatingCard>
               </Link>

@@ -154,7 +154,7 @@ export async function POST(request: NextRequest) {
 
     // Send email via Resend
     const { data: emailData, error: emailError } = await resend.emails.send({
-      from: "メラボコ <noreply@meraboco.com>",
+      from: "メラボコ <contact@meraboco.jp>",
       to: ["info@meraboco.jp"],
       replyTo: sanitizedData.email,
       subject: `【メラボコ】お問い合わせ: ${sanitizedData.name}様`,
@@ -234,7 +234,7 @@ ${sanitizedData.message}
 
     // Send auto-reply to customer
     await resend.emails.send({
-      from: "メラボコ <noreply@meraboco.com>",
+      from: "メラボコ <contact@meraboco.jp>",
       to: [sanitizedData.email],
       subject: "【メラボコ】お問い合わせありがとうございます",
       html: `

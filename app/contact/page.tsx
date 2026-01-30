@@ -17,7 +17,7 @@ export default function ContactPage() {
   return (
     <>
       <Header />
-      <main className="pt-20">
+      <main className="pt-20 pb-24">
         <Contact />
       </main>
       <Footer />

@@ -64,50 +64,64 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
                 </div>
               )}
               {!showEmpty &&
-                smartPlans.map((plan) => (
-                  <motion.div
-                    key={plan.id}
-                    className="glass-main-pricing group relative rounded-2xl border border-stone-200/70 p-8 shadow-xl transition-all duration-700"
-                    initial="initial"
-                    whileHover={{ y: -2 }}
-                  >
-                    <div className="flex flex-col items-center text-center">
-                      <div className="text-sm font-bold tracking-[0.4em] text-slate-500 uppercase transition-colors duration-500 group-hover:text-blue-600">
-                        {getPlanName(plan)}
-                      </div>
+                smartPlans.map((plan) => {
+                  const isStandard = isStandardPlan(plan)
+                  return (
+                    <motion.div
+                      key={plan.id}
+                      className={`glass-main-pricing group relative rounded-3xl border p-10 transition-all duration-700 ${isStandard
+                        ? "border-blue-200/50 bg-white/90 shadow-2xl ring-1 ring-blue-500/10"
+                        : "border-stone-200/60 bg-white/70 shadow-xl"
+                        }`}
+                      initial={{ opacity: 1, y: 0 }}
+                      whileHover={{ y: -8, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } }}
+                    >
+                      <div className="glitter-effect" />
+                      {isStandard && (
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-blue-600 px-4 py-1 text-[10px] font-bold tracking-widest text-white shadow-lg shadow-blue-500/30 uppercase">
+                          Recommended
+                        </div>
+                      )}
 
-                      {/* Price Section - Always Visible */}
-                      <div className="mt-6 w-full opacity-100">
-                        <div className="flex flex-col items-center">
-                          <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-bold text-[#0f172a]">
-                              {plan.monthlyPrice}
-                            </span>
-                            <span className="text-xs font-semibold text-slate-600">円 / 毎月</span>
-                          </div>
-                          <div className="mt-2 text-xs font-medium text-slate-500">
-                            {copy.initialCost} {plan.initialCost}
-                          </div>
+                      <div className="flex flex-col items-center text-center">
+                        <div className="text-[11px] font-bold tracking-[0.5em] text-slate-400 uppercase transition-colors duration-500 group-hover:text-blue-500">
+                          {getPlanName(plan)}
+                        </div>
 
-                          <div className="mt-8 grid w-full gap-3">
-                            <Link
-                              href={getDemoHref(plan)}
-                              className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-800 transition-all duration-500 hover:border-blue-400/50 hover:bg-slate-50 hover:text-blue-600 shadow-sm"
-                            >
-                              {copy.demo}
-                            </Link>
-                            <Link
-                              href="/contact"
-                              className="inline-flex w-full items-center justify-center rounded-full bg-[#0f172a] px-6 py-3 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
-                            >
-                              {chooseLabel}
-                            </Link>
+                        {/* Price Section - Always Visible with Elegant Entrance */}
+                        <div className="mt-8 w-full">
+                          <div className="flex flex-col items-center">
+                            <div className="flex items-baseline gap-1.5">
+                              <span className="text-5xl font-bold tracking-tight text-slate-900">
+                                {plan.monthlyPrice}
+                              </span>
+                              <span className="text-xs font-semibold text-slate-500">円 / 毎月</span>
+                            </div>
+                            <div className="mt-3 text-[11px] font-medium tracking-wide text-slate-400">
+                              {copy.initialCost} {plan.initialCost}
+                            </div>
+
+                            <div className="mt-10 grid w-full gap-4">
+                              <Link
+                                href={getDemoHref(plan)}
+                                className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white/50 px-6 py-3.5 text-xs font-bold text-slate-700 backdrop-blur-sm transition-all duration-500 hover:border-blue-300 hover:bg-white hover:text-blue-600 hover:shadow-md"
+                              >
+                                {copy.demo}
+                              </Link>
+                              <Link
+                                href="/contact"
+                                className={`inline-flex w-full items-center justify-center rounded-full px-6 py-4 text-xs font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:shadow-xl ${isStandard ? "bg-blue-600 hover:bg-blue-500" : "bg-slate-900 hover:bg-slate-800"
+                                  }`}
+                              >
+                                {chooseLabel}
+                              </Link>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </motion.div>
-                ))}
+                    </motion.div>
+                  )
+                })}
             </div>
           </div>
 
@@ -118,26 +132,26 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
             <div className="grid gap-6 md:grid-cols-3">
               {!showEmpty && proPlan && smartPlans.every((plan) => plan.id !== proPlan.id) && (
                 <motion.div
-                  className="glass-main-pricing group rounded-2xl border border-stone-200/50 p-6 shadow-xl transition-all duration-700"
-                  whileHover={{ y: -2 }}
+                  whileHover={{ y: -8 }}
                 >
-                  <div className="text-sm font-semibold tracking-[0.3em] text-slate-500 uppercase">
+                  <div className="glitter-effect" />
+                  <div className="text-[11px] font-bold tracking-[0.4em] text-slate-400 uppercase">
                     {getPlanName(proPlan)}
                   </div>
-                  <div className="mt-2 flex items-baseline gap-1">
-                    <span className="text-4xl font-bold text-slate-900 transition-colors duration-300">
+                  <div className="mt-4 flex items-baseline gap-1.5">
+                    <span className="text-4xl font-bold tracking-tight text-slate-900">
                       {proPlan.monthlyPrice}
                     </span>
-                    <span className="text-sm text-slate-500">円 / 毎月</span>
+                    <span className="text-xs font-semibold text-slate-500">円 / 毎月</span>
                   </div>
-                  <div className="mt-1 text-xs text-slate-400">
+                  <div className="mt-2 text-[11px] font-medium text-slate-400">
                     {copy.initialCost} {proPlan.initialCost}
                   </div>
-                  <div className="mt-6">
-                    <p className="mb-3 text-xs leading-relaxed text-stone-400">{customWarning}</p>
+                  <div className="mt-8">
+                    <p className="mb-6 text-[11px] leading-relaxed text-slate-400 italic">{customWarning}</p>
                     <Link
                       href="/#contact"
-                      className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-[#0f172a] px-4 py-3 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800"
+                      className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-6 py-4 text-xs font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
                     >
                       {copy.consult}
                     </Link>
@@ -147,33 +161,33 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
               {customPlans.map((plan: any, index: number) => (
                 <motion.div
                   key={index}
-                  className="glass-main-pricing group relative rounded-2xl border border-stone-200/70 bg-white/50 p-6 shadow-lg transition-all duration-700"
-                  whileHover={{ y: -2 }}
+                  whileHover={{ y: -8 }}
                 >
+                  <div className="glitter-effect" />
                   <div className="flex flex-col items-center text-center">
-                    <div className="text-xs font-bold tracking-[0.2em] text-slate-400 uppercase">
+                    <div className="text-[11px] font-bold tracking-[0.3em] text-slate-400 uppercase">
                       PLAN {index + 1}
                     </div>
-                    <div className="mt-2 text-lg font-bold text-slate-800">
+                    <div className="mt-2 text-lg font-bold tracking-tight text-slate-800">
                       {plan.title}
                     </div>
 
                     {/* Price Section - Always Visible */}
-                    <div className="mt-4 w-full opacity-100">
+                    <div className="mt-6 w-full">
                       <div className="flex flex-col items-center">
                         <div className="flex items-baseline gap-1">
-                          <span className="text-4xl font-bold text-[#0f172a]">
+                          <span className="text-4xl font-bold tracking-tight text-slate-900">
                             {plan.price}
                           </span>
                         </div>
-                        <p className="mt-4 text-xs font-medium leading-relaxed text-slate-600">
+                        <p className="mt-6 text-[11px] font-medium leading-relaxed text-slate-500 italic max-w-[200px]">
                           {plan.description}
                         </p>
 
-                        <div className="mt-8 grid w-full gap-3">
+                        <div className="mt-10 grid w-full gap-3">
                           <Link
                             href="/contact"
-                            className="inline-flex w-full items-center justify-center rounded-full bg-[#0f172a] px-6 py-3 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
+                            className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-6 py-4 text-xs font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
                           >
                             {chooseLabel}
                           </Link>

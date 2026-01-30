@@ -76,42 +76,35 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
                         {getPlanName(plan)}
                       </div>
 
-                      {/* Price Section - Revealed on Hover */}
-                      <motion.div
-                        className="overflow-hidden"
-                        variants={{
-                          initial: { opacity: 0, y: 4 },
-                          hover: { opacity: 1, y: 0 }
-                        }}
-                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                      >
+                      {/* Price Section - Always Visible */}
+                      <div className="mt-6 w-full opacity-100">
                         <div className="flex flex-col items-center">
                           <div className="flex items-baseline gap-1">
-                            <span className="text-4xl font-bold text-slate-900">
+                            <span className="text-4xl font-bold text-[#0f172a]">
                               {plan.monthlyPrice}
                             </span>
-                            <span className="text-xs font-semibold text-slate-500">円 / 毎月</span>
+                            <span className="text-xs font-semibold text-slate-600">円 / 毎月</span>
                           </div>
-                          <div className="mt-2 text-xs font-medium text-slate-400">
+                          <div className="mt-2 text-xs font-medium text-slate-500">
                             {copy.initialCost} {plan.initialCost}
                           </div>
 
                           <div className="mt-8 grid w-full gap-3">
                             <Link
                               href={getDemoHref(plan)}
-                              className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white/50 px-6 py-3 text-sm font-bold text-slate-800 transition-all duration-500 hover:border-blue-400/50 hover:bg-white hover:text-blue-600"
+                              className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-bold text-slate-800 transition-all duration-500 hover:border-blue-400/50 hover:bg-slate-50 hover:text-blue-600 shadow-sm"
                             >
                               {copy.demo}
                             </Link>
                             <Link
                               href="/contact"
-                              className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
+                              className="inline-flex w-full items-center justify-center rounded-full bg-[#0f172a] px-6 py-3 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
                             >
                               {chooseLabel}
                             </Link>
                           </div>
                         </div>
-                      </motion.div>
+                      </div>
                     </div>
                   </motion.div>
                 ))}
@@ -144,7 +137,7 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
                     <p className="mb-3 text-xs leading-relaxed text-stone-400">{customWarning}</p>
                     <Link
                       href="/#contact"
-                      className="inline-flex w-full items-center justify-center rounded-full border border-white/20 bg-white/20 px-4 py-2 text-sm font-semibold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-blue-600"
+                      className="inline-flex w-full items-center justify-center rounded-full border border-slate-200 bg-[#0f172a] px-4 py-3 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800"
                     >
                       {copy.consult}
                     </Link>
@@ -165,35 +158,28 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
                       {plan.title}
                     </div>
 
-                    {/* Price Section - Revealed on Hover */}
-                    <motion.div
-                      className="overflow-hidden"
-                      variants={{
-                        initial: { opacity: 0, y: 4 },
-                        hover: { opacity: 1, y: 0 }
-                      }}
-                      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-                    >
+                    {/* Price Section - Always Visible */}
+                    <div className="mt-4 w-full opacity-100">
                       <div className="flex flex-col items-center">
                         <div className="flex items-baseline gap-1">
-                          <span className="text-4xl font-bold text-slate-900">
+                          <span className="text-4xl font-bold text-[#0f172a]">
                             {plan.price}
                           </span>
                         </div>
-                        <p className="mt-4 text-xs font-medium leading-relaxed text-slate-500">
+                        <p className="mt-4 text-xs font-medium leading-relaxed text-slate-600">
                           {plan.description}
                         </p>
 
                         <div className="mt-8 grid w-full gap-3">
                           <Link
                             href="/contact"
-                            className="inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-6 py-3 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
+                            className="inline-flex w-full items-center justify-center rounded-full bg-[#0f172a] px-6 py-3 text-sm font-bold text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-slate-800 hover:shadow-lg"
                           >
                             {chooseLabel}
                           </Link>
                         </div>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
                 </motion.div>
               ))}

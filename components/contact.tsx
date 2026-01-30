@@ -100,7 +100,7 @@ export default function Contact() {
     <section
       ref={sectionRef}
       id="contact"
-      className="py-32 md:py-40 relative bg-transparent mt-24 pb-64 md:pb-80"
+      className="py-32 md:py-40 relative bg-transparent mt-24 pb-80 md:pb-[28rem]"
       style={{ isolation: "isolate" }}
     >
 

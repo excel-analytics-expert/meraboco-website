@@ -820,11 +820,10 @@ export const translations = {
         },
         heroLabel: "Hotel & Ryokan",
         aboutLabel: "ABOUT",
-        aboutTitle: "私たちの想い",
-        aboutSubtitle: "旅の記憶に残る滞在を",
-        aboutText:
-          "丁寧に手入れされた客室、地元食材を活かしたお料理、静かな湯の時間。短い時間の中でも、心がほどける滞在体験をご提供します。",
-        aboutBullets: ["全12室のプライベートな空間", "地元の旬を味わう会席料理", "湯上がりのラウンジで過ごす静かな夜"],
+        aboutTitle: "コンセプト",
+        aboutSubtitle: "最高のサービスをご提供します",
+        aboutText: "こちらはメラボコ・デモサイトです。",
+        aboutBullets: ["専門性の高いスタッフ", "迅速かつ丁寧な対応", "ニーズに合わせた柔軟な提案"],
         newsLabel: "NEWS",
         newsTitle: "お知らせ",
         newsNote: "最新の3件",
@@ -832,9 +831,9 @@ export const translations = {
         infoLabel: "INFO",
         infoTitle: "インフォメーション",
         infoLabels: {
-          address: "所在地",
+          address: "住所",
           phone: "電話番号",
-          hours: "営業時間",
+          hours: "受付時間",
         },
         actionLabel: "STAY",
         actionTitle: "ご予約・お問い合わせ",
@@ -847,15 +846,15 @@ export const translations = {
         note: "※このサイトはライトプラン（2,980円 / 毎月）の標準機能のみで制作されています",
         updatedAtFallback: "更新日未定",
         fallbackSite: {
-          name: "山霞温泉 そよ風の宿",
-          catchCopy: "深呼吸したくなる、静けさと温もりの宿。",
+          name: "読み込み中...",
+          catchCopy: "コンテンツを準備しています...",
           description:
-            "山あいの静かな温泉地に佇む、全12室の小さな宿。四季の移ろいとともに、お客様の心をほどく滞在をご提案します。",
+            "microCMSからサイト情報を取得しています。",
         },
         dummyInfo: {
-          address: "〒000-0000 長野県〇〇市〇〇1-2-3",
-          phone: "050-1793-1290",
-          hours: "チェックイン 15:00 / チェックアウト 11:00",
+          address: "〒000-0000 東京都港区北青山1-3-3",
+          phone: "03-xxxx-xxxx",
+          hours: "平日 9:00 - 18:00",
         },
       },
       standard: {
@@ -873,9 +872,8 @@ export const translations = {
         },
         heroLabel: "Hotel Website Demo",
         aboutLabel: "ABOUT",
-        aboutTitle: "上質な時間を届ける宿",
-        aboutText:
-          "落ち着いた空間設計と、細やかなサービス設計で、ビジネス利用にも観光にも心地よい滞在を提供します。",
+        aboutTitle: "高品質なサービス",
+        aboutText: "こちらはメラボコ・デモサイトです。",
         highlightsLabel: "FEATURES",
         highlightsTitle: "スタンダードプランの強み",
         highlightsIntro: "更新性と情報整理に強い構成で、宿の魅力を丁寧に伝えます。",
@@ -888,8 +886,8 @@ export const translations = {
         accessTitle: "アクセス",
         sightseeingTitle: "周辺観光",
         sightseeingText:
-          "宿からアクセスしやすい観光スポットや季節の体験をご案内し、滞在前後の予定づくりをサポートします。",
-        sightseeingItems: ["伝統的な温泉街の街並み", "地元食材を楽しめる朝市", "森に囲まれた散策コース"],
+          "周辺の役立つ情報や、ビジネスに役立つスポットをご案内します。",
+        sightseeingItems: ["最寄り駅からのアクセス", "周辺の提携施設", "便利なビジネススポット"],
         serviceHighlights: [
           "独自ドメイン対応で、公式サイトの信頼感を強化",
           "季節のプランやイベント情報を柔軟に更新",
@@ -945,15 +943,15 @@ export const translations = {
         note: "※このサイトはスタンダードプラン（4,980円 / 毎月）の標準機能で制作されています",
         updatedAtFallback: "更新日未定",
         fallbackSite: {
-          name: "山霞温泉 そよ風の宿",
-          catchCopy: "上質な静けさと、確かなもてなし。",
+          name: "Loading...",
+          catchCopy: "Preparing content...",
           description:
-            "四季の移ろいを感じる全16室の宿。地元の旬と丁寧な接客で、特別な時間をお届けします。",
+            "Fetching site information from microCMS.",
         },
         dummyInfo: {
-          address: "〒000-0000 長野県〇〇市〇〇1-2-3",
+          address: "〒107-0061 東京都港区北青山1-3-3 三橋ビル3F",
           phone: "050-1793-1290",
-          hours: "チェックイン 15:00 / チェックアウト 11:00",
+          hours: "9:00 - 18:00 (平日)",
         },
       },
       pro: {
@@ -972,8 +970,7 @@ export const translations = {
         heroLabel: "Premium Hotel Demo",
         aboutLabel: "ABOUT",
         aboutTitle: "上質な滞在体験を、より深く",
-        aboutText:
-          "細部まで磨き上げた世界観と、信頼感を高める情報設計で、プロプランならではの高級感を演出します。",
+        aboutText: "こちらはメラボコ・デモサイトです。",
         aboutSubtitle: "格式あるブランドサイトの完成形",
         aboutBullets: ["ブランドの物語を伝える構成設計", "高解像度のビジュアル運用", "多言語・多拠点展開への拡張性"],
         featuresLabel: "FEATURES",
@@ -1040,10 +1037,10 @@ export const translations = {
         note: "※このサイトはプロプラン（8,000円 / 毎月〜）の標準機能で制作されています",
         updatedAtFallback: "更新日未定",
         fallbackSite: {
-          name: "山霞温泉 そよ風の宿",
-          catchCopy: "唯一無二の滞在体験を、格式ある佇まいで。",
+          name: "読み込み中...",
+          catchCopy: "コンテンツを準備しています...",
           description:
-            "上質な設計と細やかな演出で、宿の世界観を余すところなく伝えるプロプラン専用の公式サイト。",
+            "microCMSからサイト情報を取得しています。",
         },
         dummyInfo: {
           address: "〒000-0000 長野県〇〇市〇〇1-2-3",
@@ -1965,11 +1962,10 @@ export const translations = {
         },
         heroLabel: "Hotel & Ryokan",
         aboutLabel: "ABOUT",
-        aboutTitle: "Our Story",
-        aboutSubtitle: "A stay that stays in memory",
-        aboutText:
-          "Well-kept rooms, seasonal local cuisine, and quiet hot-spring moments. We offer a stay that gently unwinds the mind.",
-        aboutBullets: ["Private rooms with 12 suites", "Seasonal kaiseki with local ingredients", "Calm evenings in the lounge"],
+        aboutTitle: "Concept",
+        aboutSubtitle: "Providing top-tier service",
+        aboutText: "This is a Meraboco demo site.",
+        aboutBullets: ["Highly specialized staff", "Prompt and professional support", "Flexible proposals tailored to needs"],
         newsLabel: "NEWS",
         newsTitle: "News",
         newsNote: "Latest 3 items",
@@ -1992,15 +1988,15 @@ export const translations = {
         note: "*This demo uses only the standard features of the Lite plan (¥2,980/mo).",
         updatedAtFallback: "No update date",
         fallbackSite: {
-          name: "Sokaze Inn",
-          catchCopy: "A quiet, warm retreat that invites deep breaths.",
+          name: "Loading...",
+          catchCopy: "Preparing content...",
           description:
-            "A small 12-room inn nestled in the mountains. We offer a stay that softens the heart with each season.",
+            "Fetching site information from microCMS.",
         },
         dummyInfo: {
-          address: "000-0000 Nagano, Japan",
-          phone: "050-1793-1290",
-          hours: "Check-in 3:00 PM / Check-out 11:00 AM",
+          address: "1-3-3 Kita-Aoyama, Minato-ku, Tokyo 107-0061, Japan",
+          phone: "03-xxxx-xxxx",
+          hours: "9:00 AM - 6:00 PM (Weekdays)",
         },
       },
       standard: {
@@ -2018,9 +2014,8 @@ export const translations = {
         },
         heroLabel: "Hotel Website Demo",
         aboutLabel: "ABOUT",
-        aboutTitle: "A refined stay experience",
-        aboutText:
-          "A calm spatial design and thoughtful service make the stay comfortable for both business and leisure guests.",
+        aboutTitle: "High-Quality Service",
+        aboutText: "This is a Meraboco demo site.",
         highlightsLabel: "FEATURES",
         highlightsTitle: "Standard plan strengths",
         highlightsIntro: "Designed for clarity and easy updates, so the property shines.",
@@ -2033,8 +2028,8 @@ export const translations = {
         accessTitle: "Access",
         sightseeingTitle: "Sightseeing",
         sightseeingText:
-          "Share nearby spots and seasonal experiences to help guests plan before and after their stay.",
-        sightseeingItems: ["Traditional hot-spring streets", "Local morning market", "Forest walking trails"],
+          "We provide useful information about the surrounding area and spots beneficial for business.",
+        sightseeingItems: ["Access from nearest station", "Nearby partner facilities", "Convenient business spots"],
         serviceHighlights: [
           "Custom domain support for stronger credibility",
           "Flexible updates for seasonal plans and events",
@@ -2074,15 +2069,15 @@ export const translations = {
         note: "*This demo uses the standard features of the Standard plan (¥4,980/mo).",
         updatedAtFallback: "No update date",
         fallbackSite: {
-          name: "Sokaze Inn",
-          catchCopy: "Quiet elegance and attentive hospitality.",
+          name: "Loading...",
+          catchCopy: "Preparing content...",
           description:
-            "A 16-room inn that reflects the seasons. We deliver special moments with local cuisine and thoughtful service.",
+            "Fetching site information from microCMS.",
         },
         dummyInfo: {
-          address: "000-0000 Nagano, Japan",
+          address: "Mitsuhashi Bldg 3F, 1-3-3 Kita-Aoyama, Minato-ku, Tokyo 107-0061, Japan",
           phone: "050-1793-1290",
-          hours: "Check-in 3:00 PM / Check-out 11:00 AM",
+          hours: "9:00 AM - 6:00 PM (Weekdays)",
         },
       },
       pro: {
@@ -2101,8 +2096,7 @@ export const translations = {
         heroLabel: "Premium Hotel Demo",
         aboutLabel: "ABOUT",
         aboutTitle: "Luxury, refined",
-        aboutText:
-          "A premium brand experience with meticulous presentation and information design that builds trust.",
+        aboutText: "This is a Meraboco demo site.",
         aboutSubtitle: "The definitive premium brand site",
         aboutBullets: ["Story-led structure design", "High-resolution visual operation", "Scalable for multilingual and multi-location use"],
         featuresLabel: "FEATURES",
@@ -2153,15 +2147,15 @@ export const translations = {
         note: "*This demo uses the standard features of the Pro plan (from ¥8,000/mo).",
         updatedAtFallback: "No update date",
         fallbackSite: {
-          name: "Sokaze Inn",
-          catchCopy: "A singular stay, presented with dignified elegance.",
+          name: "Loading...",
+          catchCopy: "Preparing content...",
           description:
-            "A premium site that communicates every detail of the inn’s world through refined design and storytelling.",
+            "Fetching site information from microCMS.",
         },
         dummyInfo: {
-          address: "000-0000 Nagano, Japan",
+          address: "Mitsuhashi Bldg 3F, 1-3-3 Kita-Aoyama, Minato-ku, Tokyo 107-1061, Japan",
           phone: "050-1793-1290",
-          hours: "Check-in 3:00 PM / Check-out 11:00 AM",
+          hours: "9:00 AM - 6:00 PM (Weekdays)",
         },
       },
     },

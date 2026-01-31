@@ -52,8 +52,6 @@ export default async function ProDemoPage() {
   }
 
   return (
-    <LanguageProvider>
-      <ProDemoClient site={site} siteError={siteError} news={news} newsError={newsError} />
-    </LanguageProvider>
+    <ProDemoClient site={site} siteError={siteError} news={news} newsError={newsError} />
   )
 }

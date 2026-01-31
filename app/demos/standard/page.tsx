@@ -52,8 +52,6 @@ export default async function StandardDemoPage() {
   }
 
   return (
-    <LanguageProvider>
-      <StandardDemoClient site={site} siteError={siteError} news={news} newsError={newsError} />
-    </LanguageProvider>
+    <StandardDemoClient site={site} siteError={siteError} news={news} newsError={newsError} />
   )
 }

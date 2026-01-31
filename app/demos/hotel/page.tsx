@@ -52,8 +52,6 @@ export default async function HotelDemoPage() {
   }
 
   return (
-    <LanguageProvider>
-      <HotelDemoClient site={site} siteError={siteError} news={news} newsError={newsError} />
-    </LanguageProvider>
+    <HotelDemoClient site={site} siteError={siteError} news={news} newsError={newsError} />
   )
 }

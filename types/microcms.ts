@@ -12,6 +12,10 @@ export type MicroCmsSite = {
   descriptionEn?: string
   description_en?: string
   plan: MicroCmsPlan
+  industry?: string
+  address?: string
+  phone?: string
+  hours?: string
   map_url?: string
   map_url_en?: string
   mapUrlEn?: string

@@ -1,0 +1,25 @@
+﻿node.exe : Loaded Prisma con
+fig from prisma.config.ts.
+発生場所 C:\Program Files\nodejs
+\npx.ps1:29 文字:3
++   & $NODE_EXE $NPX_CLI_JS 
+$args
++   ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          
+    : NotSpecified: (Loade  
+  d Prisma c...isma.confi   
+ g.ts.:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+
+Prisma schema loaded from pr
+isma\schema.prisma.
+
+笨・Generated Prisma Client (v7.4.1) to .\node_modules\@prisma\client in 119ms
+
+Start by importing your Prisma Client (See: https://pris.ly/d/importing-client)
+
+

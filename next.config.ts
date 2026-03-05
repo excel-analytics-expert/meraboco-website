@@ -3,18 +3,16 @@ import type { NextConfig } from "next"
 const nextConfig: NextConfig = {
   // セキュリティ: X-Powered-Byヘッダーを無効化
   poweredByHeader: false,
-  
+
   // パフォーマンス: Gzip圧縮を有効化
   compress: true,
-  
+
   // ビルド設定
   typescript: {
     ignoreBuildErrors: false,
   },
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
-  
+
+
   // 画像最適化（Core Web Vitals向上）
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -24,12 +22,12 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  
+
   // 実験的機能（パフォーマンス向上）
   experimental: {
     optimizeCss: true,
   },
-  
+
   // セキュリティヘッダー（A+評価対応）
   async headers() {
     return [
@@ -71,35 +69,24 @@ const nextConfig: NextConfig = {
             key: "Permissions-Policy",
             value: "camera=(), microphone=(), geolocation=(), interest-cohort=()",
           },
-          // Content Security Policy（厳格版）
+          // Content Security Policy
           {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://va.vercel-scripts.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://va.vercel-scripts.com https://js.stripe.com",
               "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com",
               "img-src 'self' data: https: blob:",
               "font-src 'self' data: https://cdnjs.cloudflare.com https://fonts.gstatic.com",
-              "connect-src 'self' https://va.vercel-scripts.com https://*.supabase.co",
+              "connect-src 'self' https://va.vercel-scripts.com https://*.supabase.co https://api.stripe.com",
+              "frame-src 'self' https://js.stripe.com https://hooks.stripe.com",
               "frame-ancestors 'none'",
               "base-uri 'self'",
               "form-action 'self'",
               "upgrade-insecure-requests",
             ].join("; "),
           },
-          // Cross-Origin設定
-          {
-            key: "Cross-Origin-Opener-Policy",
-            value: "same-origin",
-          },
-          {
-            key: "Cross-Origin-Resource-Policy",
-            value: "same-origin",
-          },
-          {
-            key: "Cross-Origin-Embedder-Policy",
-            value: "require-corp",
-          },
+
         ],
       },
       // 静的アセットのキャッシュ設定（パフォーマンス向上）
@@ -123,7 +110,7 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-  
+
   // リダイレクト設定
   async redirects() {
     return [
@@ -136,7 +123,7 @@ const nextConfig: NextConfig = {
       },
     ]
   },
-  
+
   // トレイリングスラッシュの統一
   trailingSlash: false,
 }

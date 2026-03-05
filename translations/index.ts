@@ -139,6 +139,12 @@ export const translations = {
         emailPlaceholder: "example@example.com",
         message: "お問い合わせ内容",
         messagePlaceholder: "お問い合わせ内容をご記入ください",
+        purpose: "制作の目的",
+        purposeOptions: ["新規制作", "リニューアル", "その他"],
+        referenceUrl: "参考URL",
+        referenceUrlPlaceholder: "https://example.com",
+        budget: "予算感",
+        budgetOptions: ["~30万円", "30~50万円", "50~100万円", "100万円~"],
         submit: "送信する",
         sending: "送信中...",
         success: "お問い合わせを受け付けました。ありがとうございます。",
@@ -1068,7 +1074,7 @@ export const translations = {
       },
       deliveryTime: { label: "役務の提供時期", value: "契約成立後、要件確認の上で順次着手します。" },
       returns: { label: "返品・キャンセル", value: "デジタルサービスの性質上、提供開始後の返品・返金はできません。" },
-      updatedAt: "最終更新日：2026年1月30日",
+      updatedAt: "最終更新日：2026年1月5日",
     },
     // Privacy Page
     privacyPage: {
@@ -1263,6 +1269,12 @@ export const translations = {
         emailPlaceholder: "example@example.com",
         message: "Message",
         messagePlaceholder: "Please enter your message",
+        purpose: "Project Purpose",
+        purposeOptions: ["New Build", "Renewal", "Other"],
+        referenceUrl: "Reference URL",
+        referenceUrlPlaceholder: "https://example.com",
+        budget: "Budget Range",
+        budgetOptions: ["Up to 300k JPY", "300k - 500k JPY", "500k - 1M JPY", "1M JPY+"],
         submit: "Submit",
         sending: "Sending...",
         success: "Thank you for your inquiry. We will get back to you soon.",
@@ -2178,7 +2190,7 @@ export const translations = {
       },
       deliveryTime: { label: "Service Delivery", value: "We start after the contract is concluded and requirements are confirmed." },
       returns: { label: "Returns/Cancellations", value: "No refunds after service delivery begins due to the nature of digital services." },
-      updatedAt: "Last updated: Jan 30, 2026",
+      updatedAt: "Last updated: Jan 5, 2026",
     },
     // Privacy Page
     privacyPage: {

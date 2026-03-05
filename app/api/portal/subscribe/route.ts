@@ -110,10 +110,19 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "合意情報の保存に失敗しました。" }, { status: 500 })
   }
 
+  const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [
+    { price: plan.stripePriceId, quantity: 1 }
+  ]
+
+  // ライトプラン (xctynp4ec) の場合、初期費用を追加
+  if (plan.id === "xctynp4ec" && process.env.STRIPE_PRICE_LITE_INITIAL) {
+    lineItems.push({ price: process.env.STRIPE_PRICE_LITE_INITIAL, quantity: 1 })
+  }
+
   const session = await stripe.checkout.sessions.create({
     mode: "subscription",
     customer_email: email,
-    line_items: [{ price: plan.stripePriceId, quantity: 1 }],
+    line_items: lineItems,
     success_url: `${origin}/portal/dashboard?checkout=success`,
     cancel_url: `${origin}/plans?checkout=cancelled`,
     metadata: {

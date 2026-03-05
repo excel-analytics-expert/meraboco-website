@@ -1,10 +1,14 @@
+// Meraboco. Created by s.kenichi
 "use client"
+
+import { useState, useEffect } from "react"
 
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Sparkles, ArrowRight } from "lucide-react"
 import type { MicroCmsPricingPlan } from "@/types/microcms"
 import { useLanguage } from "@/contexts/language-context"
+import { createClient } from "@/lib/supabase/client"
 
 type SmartPlanSectionProps = {
   plans: MicroCmsPricingPlan[]
@@ -118,20 +122,21 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
                 <div className="text-[10px] font-bold tracking-[0.5em] text-slate-400 uppercase mb-8">
                   {language === "ja" ? proPlan.name : proPlan.nameEn ?? proPlan.name_en ?? proPlan.name}
                 </div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">{proPlan.monthlyPrice}</span>
-                  <span className="text-[10px] font-bold text-slate-500 uppercase">円 / 毎月</span>
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-5xl md:text-6xl font-bold tracking-tight text-slate-900">{proPlan.monthlyPrice}</span>
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">円 / 毎月</span>
                 </div>
                 <div className="mt-2 text-[10px] font-bold tracking-wider text-slate-400 uppercase">
                   INITIAL {proPlan.initialCost}
                 </div>
                 <p className="mt-8 text-[11px] leading-relaxed text-slate-400 italic mb-10">{customWarning}</p>
-                <motion.div whileTap={{ scale: 0.96 }}>
+                <motion.div whileTap={{ scale: 0.96 }} className="w-full mt-auto">
                   <Link
                     href="/contact"
-                    className="flex w-full items-center justify-center rounded-full bg-slate-900 py-5 text-xs font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl"
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 py-5 text-sm font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl group"
                   >
                     {consultLabel}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </motion.div>
               </motion.div>
@@ -150,16 +155,20 @@ export default function SmartPlanSection({ plans, hasError }: SmartPlanSectionPr
                   PLAN {index + 1}
                 </div>
                 <div className="text-xl font-bold text-slate-800 mb-6 tracking-wide">{plan.title}</div>
-                <div className="text-4xl md:text-5xl font-bold text-slate-900 mb-8 tracking-tight">{plan.price}</div>
+                <div className="flex items-baseline gap-1.5 mb-8">
+                  <span className="text-5xl md:text-6xl font-bold text-slate-900 tracking-tight">{plan.price.replace("円〜", "")}</span>
+                  <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">円〜</span>
+                </div>
                 <p className="text-[11px] leading-relaxed text-stone-500 italic mb-10 mx-auto max-w-[220px]">
                   {plan.description}
                 </p>
                 <motion.div className="w-full mt-auto" whileTap={{ scale: 0.96 }}>
                   <Link
                     href="/contact"
-                    className="flex w-full items-center justify-center rounded-full bg-slate-900 py-5 text-xs font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl"
+                    className="flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 py-5 text-sm font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl group"
                   >
                     {consultLabel}
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </motion.div>
               </motion.div>
@@ -178,6 +187,18 @@ function PlanCard({ plan, idx, isStandard, chooseLabel, language }: {
   chooseLabel: string,
   language: string
 }) {
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null)
+  const [userEmail, setUserEmail] = useState<string | undefined>(undefined)
+  const supabase = createClient()
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session?.user?.email) {
+        setUserEmail(session.user.email)
+      }
+    })
+  }, [supabase])
+
   const demoLinks = [
     { label: language === 'ja' ? "宿泊施設" : "Hotel", industry: "hotel" },
     { label: language === 'ja' ? "飲食店" : "Restaurant", industry: "restaurant" },
@@ -186,6 +207,57 @@ function PlanCard({ plan, idx, isStandard, chooseLabel, language }: {
 
   const baseDemoHref = getDemoHref(plan)
 
+  const handleSubscribe = async (priceId: string) => {
+    console.log(`[PricingCard] 決済リクエスト開始: ${priceId}`);
+    if (!priceId) {
+      alert("エラー: プランIDが取得できませんでした。");
+      return;
+    }
+    setLoadingPlan(priceId)
+
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          priceId: priceId,
+          email: userEmail, // ログイン中のユーザーメールアドレス
+        }),
+      });
+
+      // 1. レスポンスが正常（200-299）でない場合、テキストとして中身を読み取る
+      if (!response.ok) {
+        const errorBody = await response.text();
+        console.error(`[PricingCard] サーバーエラー (${response.status}):`, errorBody);
+        throw new Error(`サーバーエラーが発生しました (${response.status})。ターミナルのログを確認してください。`);
+      }
+
+      // 2. JSONパースを試みる前に、ボディが空でないか確認
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const text = await response.text();
+        console.error("[PricingCard] 非JSONレスポンスを受信:", text);
+        throw new Error("サーバーから不正な形式の応答がありました。");
+      }
+
+      const data = await response.json();
+
+      if (data.checkoutUrl) {
+        console.log(`[PricingCard] Stripeチェックアウトへリダイレクト: ${data.checkoutUrl}`);
+        window.location.href = data.checkoutUrl;
+      } else {
+        throw new Error(data.error || "決済URLの取得に失敗しました。");
+      }
+    } catch (error: any) {
+      console.error("[PricingCard] handleSubscribe 致命的エラー:", error);
+      alert(`エラー: ${error.message}`);
+    } finally {
+      setLoadingPlan(null)
+    }
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -193,8 +265,8 @@ function PlanCard({ plan, idx, isStandard, chooseLabel, language }: {
       viewport={{ once: true }}
       transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: idx * 0.1 }}
       className={`group relative rounded-[3rem] border p-10 md:p-14 transition-all duration-700 ${isStandard
-          ? "border-blue-200/50 bg-white/95 shadow-2xl ring-1 ring-blue-500/10"
-          : "border-stone-100 bg-white/80 shadow-xl"
+        ? "border-blue-200/50 bg-white/95 shadow-2xl ring-1 ring-blue-500/10"
+        : "border-stone-100 bg-white/80 shadow-xl"
         }`}
       whileHover={{ y: -12, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }}
     >
@@ -210,7 +282,7 @@ function PlanCard({ plan, idx, isStandard, chooseLabel, language }: {
         </div>
 
         <div className="flex items-baseline gap-1.5 mb-1.5">
-          <span className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
+          <span className="text-5xl md:text-6xl font-bold tracking-tight text-slate-900">
             {plan.monthlyPrice}
           </span>
           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">円 / 毎月</span>
@@ -238,14 +310,15 @@ function PlanCard({ plan, idx, isStandard, chooseLabel, language }: {
 
         <div className="w-full">
           <motion.div whileTap={{ scale: 0.96 }}>
-            <Link
-              href="/contact"
-              className={`flex w-full items-center justify-center gap-2 rounded-full py-5 text-sm font-bold text-white transition-all duration-500 ${isStandard ? "bg-blue-600 hover:bg-blue-500 hover:shadow-2xl shadow-blue-500/10" : "bg-slate-900 hover:bg-slate-800 hover:shadow-xl"
-                }`}
+            <button
+              onClick={() => handleSubscribe(plan.stripePriceId as string)}
+              disabled={loadingPlan !== null}
+              className={`flex w-full cursor-pointer items-center justify-center gap-2 rounded-full py-5 text-sm font-bold text-white transition-all duration-500 ${isStandard ? "bg-blue-600 hover:bg-blue-500 hover:shadow-2xl shadow-blue-500/10" : "bg-slate-900 hover:bg-slate-800 hover:shadow-xl"
+                } ${loadingPlan === plan.stripePriceId ? "opacity-70" : ""}`}
             >
-              {chooseLabel}
+              {loadingPlan === plan.stripePriceId ? (language === "ja" ? "処理中..." : "Processing...") : chooseLabel}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
+            </button>
           </motion.div>
         </div>
       </div>

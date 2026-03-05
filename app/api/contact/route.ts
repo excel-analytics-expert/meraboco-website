@@ -38,6 +38,9 @@ function validateInput(data: {
   name: string
   email: string
   company?: string
+  purpose: string
+  referenceUrl?: string
+  budget: string
   message: string
 }): { valid: boolean; error?: string } {
   // Name validation
@@ -60,6 +63,16 @@ function validateInput(data: {
   // Company validation (optional)
   if (data.company && data.company.length > 200) {
     return { valid: false, error: "会社名は200文字以内で入力してください" }
+  }
+
+  // Purpose validation
+  if (!data.purpose) {
+    return { valid: false, error: "制作の目的を選択してください" }
+  }
+
+  // Budget validation
+  if (!data.budget) {
+    return { valid: false, error: "予算感を選択してください" }
   }
 
   // Message validation
@@ -99,9 +112,9 @@ function sanitize(str: string): string {
 export async function POST(request: NextRequest) {
   try {
     // Get IP for rate limiting
-    const ip = request.headers.get("x-forwarded-for")?.split(",")[0] || 
-               request.headers.get("x-real-ip") || 
-               "unknown"
+    const ip = request.headers.get("x-forwarded-for")?.split(",")[0] ||
+      request.headers.get("x-real-ip") ||
+      "unknown"
 
     // Check rate limit
     if (!checkRateLimit(ip)) {
@@ -113,10 +126,10 @@ export async function POST(request: NextRequest) {
 
     // Parse request body
     const body = await request.json()
-    const { name, email, company, message } = body
+    const { name, email, company, purpose, referenceUrl, budget, message } = body
 
     // Validate input
-    const validation = validateInput({ name, email, company, message })
+    const validation = validateInput({ name, email, company, purpose, referenceUrl, budget, message })
     if (!validation.valid) {
       return NextResponse.json(
         { error: validation.error },
@@ -129,6 +142,9 @@ export async function POST(request: NextRequest) {
       name: sanitize(name),
       email: sanitize(email),
       company: company ? sanitize(company) : null,
+      purpose: sanitize(purpose),
+      referenceUrl: referenceUrl ? sanitize(referenceUrl) : null,
+      budget: sanitize(budget),
       message: sanitize(message),
     }
 
@@ -140,6 +156,9 @@ export async function POST(request: NextRequest) {
           name: sanitizedData.name,
           email: sanitizedData.email,
           company: sanitizedData.company,
+          purpose: sanitizedData.purpose,
+          reference_url: sanitizedData.referenceUrl,
+          budget: sanitizedData.budget,
           message: sanitizedData.message,
           ip_address: ip,
           created_at: new Date().toISOString(),
@@ -199,6 +218,34 @@ export async function POST(request: NextRequest) {
                 </td>
                 <td style="padding: 15px 0; border-bottom: 1px solid #eee;">
                   ${sanitizedData.company}
+                </td>
+              </tr>
+              ` : ''}
+              <tr>
+                <td style="padding: 15px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #666;">
+                  制作の目的
+                </td>
+                <td style="padding: 15px 0; border-bottom: 1px solid #eee;">
+                  ${sanitizedData.purpose}
+                </td>
+              </tr>
+              <tr>
+                <td style="padding: 15px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #666;">
+                  予算感
+                </td>
+                <td style="padding: 15px 0; border-bottom: 1px solid #eee;">
+                  ${sanitizedData.budget}
+                </td>
+              </tr>
+              ${sanitizedData.referenceUrl ? `
+              <tr>
+                <td style="padding: 15px 0; border-bottom: 1px solid #eee; font-weight: bold; color: #666;">
+                  参考URL
+                </td>
+                <td style="padding: 15px 0; border-bottom: 1px solid #eee;">
+                  <a href="${sanitizedData.referenceUrl}" style="color: #0066cc;">
+                    ${sanitizedData.referenceUrl}
+                  </a>
                 </td>
               </tr>
               ` : ''}

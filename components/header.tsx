@@ -5,12 +5,17 @@ import Link from "next/link"
 import Image from "next/image"
 import { useLanguage } from "@/contexts/language-context"
 import { usePathname } from "next/navigation"
+import { useAuth } from "@/components/auth/AuthProvider"
+import { motion, AnimatePresence } from "framer-motion"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const { language, setLanguage, t } = useLanguage()
   const pathname = usePathname()
+
+  // AuthProviderからのユーザー情報
+  const { user } = useAuth()
 
   // スクロール検知
   useEffect(() => {
@@ -86,28 +91,27 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? "bg-white/95 backdrop-blur-md shadow-lg py-2" 
-            : "bg-white shadow-sm py-3"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-lg py-2"
+          : "bg-white shadow-sm py-3"
+          }`}
         role="banner"
       >
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo */}
-            <Link 
-              href="/" 
+            <Link
+              href="/"
               className="flex items-center gap-2 sm:gap-3 hover:opacity-80 transition-opacity z-50"
               onClick={closeMenu}
               aria-label="メラボコ ホームへ戻る"
             >
               <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-lg overflow-hidden bg-white shadow-sm">
-                <Image 
-                  src="/assets/logo.png" 
-                  alt="メラボコ" 
-                  width={40} 
-                  height={40} 
+                <Image
+                  src="/assets/logo.png"
+                  alt="メラボコ"
+                  width={40}
+                  height={40}
                   className="object-contain"
                   priority
                 />
@@ -123,11 +127,10 @@ export default function Header() {
                 <Link
                   key={item.href}
                   href={item.href}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-                    isActiveLink(item.href)
-                      ? "text-blue-600 bg-blue-50"
-                      : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
-                  }`}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${isActiveLink(item.href)
+                    ? "text-blue-600 bg-blue-50"
+                    : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -156,6 +159,26 @@ export default function Header() {
               >
                 {t("header.contact")}
               </Link>
+
+              {/* Admin Dashboard Button (Only visible when logged in) */}
+              <AnimatePresence>
+                {user && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9, x: 10 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, x: 10 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  >
+                    <Link
+                      href="/admin/diagnostics"
+                      className="ml-2 px-4 py-2.5 bg-gradient-to-r from-amber-200 to-yellow-400 text-yellow-900 rounded-full hover:from-amber-300 hover:to-yellow-500 hover:shadow-[0_0_15px_rgba(251,191,36,0.4)] transition-all duration-300 font-bold flex items-center gap-1.5"
+                    >
+                      <span className="text-base leading-none">👑</span>
+                      管理者ダッシュボード
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -168,19 +191,16 @@ export default function Header() {
             >
               <div className="w-6 h-5 relative flex flex-col justify-center items-center">
                 <span
-                  className={`block absolute h-0.5 w-6 bg-gray-900 transform transition-all duration-300 ease-in-out ${
-                    isMenuOpen ? "rotate-45" : "-translate-y-2"
-                  }`}
+                  className={`block absolute h-0.5 w-6 bg-gray-900 transform transition-all duration-300 ease-in-out ${isMenuOpen ? "rotate-45" : "-translate-y-2"
+                    }`}
                 />
                 <span
-                  className={`block absolute h-0.5 w-6 bg-gray-900 transition-all duration-300 ease-in-out ${
-                    isMenuOpen ? "opacity-0 scale-0" : "opacity-100"
-                  }`}
+                  className={`block absolute h-0.5 w-6 bg-gray-900 transition-all duration-300 ease-in-out ${isMenuOpen ? "opacity-0 scale-0" : "opacity-100"
+                    }`}
                 />
                 <span
-                  className={`block absolute h-0.5 w-6 bg-gray-900 transform transition-all duration-300 ease-in-out ${
-                    isMenuOpen ? "-rotate-45" : "translate-y-2"
-                  }`}
+                  className={`block absolute h-0.5 w-6 bg-gray-900 transform transition-all duration-300 ease-in-out ${isMenuOpen ? "-rotate-45" : "translate-y-2"
+                    }`}
                 />
               </div>
             </button>
@@ -190,9 +210,8 @@ export default function Header() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${
-          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
-        }`}
+        className={`lg:hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-40 transition-opacity duration-300 ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          }`}
         onClick={closeMenu}
         aria-hidden="true"
       />
@@ -200,9 +219,8 @@ export default function Header() {
       {/* Mobile Menu Panel */}
       <nav
         id="mobile-menu"
-        className={`lg:hidden fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-40 transform transition-transform duration-300 ease-out shadow-2xl ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`lg:hidden fixed top-0 right-0 bottom-0 w-full max-w-sm bg-white z-40 transform transition-transform duration-300 ease-out shadow-2xl ${isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         role="navigation"
         aria-label="モバイルナビゲーション"
         aria-hidden={!isMenuOpen}
@@ -215,11 +233,10 @@ export default function Header() {
                 <li>
                   <Link
                     href="/"
-                    className={`flex items-center justify-between px-4 py-4 rounded-xl font-medium transition-all duration-200 ${
-                      pathname === "/"
-                        ? "text-blue-600 bg-blue-50"
-                        : "text-gray-800 hover:bg-gray-50 active:bg-gray-100"
-                    }`}
+                    className={`flex items-center justify-between px-4 py-4 rounded-xl font-medium transition-all duration-200 ${pathname === "/"
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-800 hover:bg-gray-50 active:bg-gray-100"
+                      }`}
                     onClick={closeMenu}
                   >
                     <span className="flex items-center gap-3">
@@ -231,16 +248,15 @@ export default function Header() {
                   </Link>
                 </li>
               )}
-              
+
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className={`flex items-center justify-between px-4 py-4 rounded-xl font-medium transition-all duration-200 ${
-                      isActiveLink(item.href)
-                        ? "text-blue-600 bg-blue-50"
-                        : "text-gray-800 hover:bg-gray-50 active:bg-gray-100"
-                    }`}
+                    className={`flex items-center justify-between px-4 py-4 rounded-xl font-medium transition-all duration-200 ${isActiveLink(item.href)
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-gray-800 hover:bg-gray-50 active:bg-gray-100"
+                      }`}
                     onClick={closeMenu}
                   >
                     <span className="flex items-center gap-3">
@@ -289,6 +305,32 @@ export default function Header() {
                   </svg>
                 </Link>
               </li>
+
+              {/* Admin Dashboard Button (Mobile) */}
+              <AnimatePresence>
+                {user && (
+                  <motion.li
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <Link
+                      href="/admin/diagnostics"
+                      className="flex items-center justify-between px-4 py-4 rounded-xl font-bold transition-all duration-200 text-yellow-900 bg-amber-100 hover:bg-amber-200"
+                      onClick={closeMenu}
+                    >
+                      <span className="flex items-center gap-3">
+                        <span>👑</span>
+                        管理者ダッシュボード
+                      </span>
+                      <svg className="w-5 h-5 text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                  </motion.li>
+                )}
+              </AnimatePresence>
             </ul>
 
             {/* Divider */}
@@ -304,11 +346,10 @@ export default function Header() {
                   onClick={() => {
                     setLanguage("ja")
                   }}
-                  className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-200 ${
-                    language === "ja"
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
+                  className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-200 ${language === "ja"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
                 >
                   {t("header.languageJa")}
                 </button>
@@ -316,11 +357,10 @@ export default function Header() {
                   onClick={() => {
                     setLanguage("en")
                   }}
-                  className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-200 ${
-                    language === "en"
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                  }`}
+                  className={`flex-1 py-3 px-4 rounded-xl font-medium transition-all duration-200 ${language === "en"
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
                 >
                   {t("header.languageEn")}
                 </button>
@@ -340,7 +380,7 @@ export default function Header() {
               </svg>
               {t("header.contact")}
             </Link>
-            
+
             {/* Phone number */}
             <a
               href="tel:050-1793-1290"

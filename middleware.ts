@@ -1,57 +1,54 @@
-import { NextResponse, type NextRequest } from "next/server"
-import { createServerClient } from "@supabase/ssr"
+import { createServerClient, type CookieOptions } from '@supabase/ssr'
+import { NextResponse, type NextRequest } from 'next/server'
 
+/**
+ * [ボルトの正確な設置]
+ * /admin 以下の全てのディレクトリを監視対象とし、
+ * 有効なセッション（認証）がないアクセスは例外なく /login へ強制リダイレクトする。
+ */
 export async function middleware(request: NextRequest) {
-  const { pathname } = request.nextUrl
-
-  if (!pathname.startsWith("/portal")) {
-    return NextResponse.next()
-  }
-
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
-  if (!supabaseUrl || !supabaseAnonKey) {
-    return NextResponse.next()
-  }
-
-  const response = NextResponse.next()
-  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
-    cookies: {
-      getAll() {
-        return request.cookies.getAll()
-      },
-      setAll(cookiesToSet) {
-        cookiesToSet.forEach(({ name, value, options }) => {
-          response.cookies.set(name, value, options)
-        })
-      },
-    },
+  let response = NextResponse.next({
+    request: { headers: request.headers },
   })
 
-  if (pathname.startsWith("/portal/callback")) {
-    return response
-  }
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        get(name: string) {
+          return request.cookies.get(name)?.value
+        },
+        set(name: string, value: string, options: CookieOptions) {
+          request.cookies.set({ name, value, ...options })
+          response = NextResponse.next({ request: { headers: request.headers } })
+          response.cookies.set({ name, value, ...options })
+        },
+        remove(name: string, options: CookieOptions) {
+          request.cookies.set({ name, value, ...options })
+          response = NextResponse.next({ request: { headers: request.headers } })
+          response.cookies.set({ name, value, ...options })
+        },
+      },
+    }
+  )
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
+  // 認証状態の厳格な確認
+  const { data: { session } } = await supabase.auth.getSession()
 
-  if (!user && pathname !== "/portal/login") {
-    const redirectUrl = request.nextUrl.clone()
-    redirectUrl.pathname = "/portal/login"
-    return NextResponse.redirect(redirectUrl)
-  }
-
-  if (user && pathname === "/portal/login") {
-    const redirectUrl = request.nextUrl.clone()
-    redirectUrl.pathname = "/portal/dashboard"
-    return NextResponse.redirect(redirectUrl)
+  // 判定ロジック：/admin へのアクセス時、セッション未保持なら即時排除
+  if (request.nextUrl.pathname.startsWith('/admin')) {
+    if (!session) {
+      const redirectUrl = request.nextUrl.clone()
+      redirectUrl.pathname = '/login'
+      return NextResponse.redirect(redirectUrl)
+    }
   }
 
   return response
 }
 
 export const config = {
-  matcher: ["/portal/:path*"],
+  // 監視対象を /admin 以下の全パスに限定してボルトを締める
+  matcher: ['/admin/:path*'],
 }

@@ -1,5 +1,6 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 
 interface AnimatedTextProps {
@@ -10,8 +11,21 @@ interface AnimatedTextProps {
 }
 
 export function AnimatedText({ children, className = "", delay = 0, staggerDelay = 0.03 }: AnimatedTextProps) {
+  const [isMounted, setIsMounted] = useState(false)
+  const [randomOffsets, setRandomOffsets] = useState<{ x: number; y: number; rotate: number }[]>([])
+
   const text = Array.isArray(children) ? children.join("") : children
   const characters = text.split("")
+
+  useEffect(() => {
+    setIsMounted(true)
+    const offsets = characters.map(() => ({
+      x: Math.random() * 100 - 50,
+      y: Math.random() * 100 - 50,
+      rotate: Math.random() * 360,
+    }))
+    setRandomOffsets(offsets)
+  }, [characters.length])
 
   const container = {
     hidden: { opacity: 0 },
@@ -29,9 +43,9 @@ export function AnimatedText({ children, className = "", delay = 0, staggerDelay
       opacity: 0,
       filter: "blur(20px) brightness(1.5)",
       scale: 0.3,
-      x: () => Math.random() * 100 - 50,
-      y: () => Math.random() * 100 - 50,
-      rotate: () => Math.random() * 360,
+      x: 0,
+      y: 0,
+      rotate: 0,
     },
     visible: {
       opacity: 1,
@@ -42,7 +56,7 @@ export function AnimatedText({ children, className = "", delay = 0, staggerDelay
       rotate: 0,
       transition: {
         duration: 1.2,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.22, 1, 0.36, 1] as const,
         filter: {
           duration: 1.4,
         },
@@ -56,7 +70,7 @@ export function AnimatedText({ children, className = "", delay = 0, staggerDelay
     transition: {
       duration: 4,
       repeat: Number.POSITIVE_INFINITY,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
       delay: delay + characters.length * staggerDelay + 0.8,
     },
   }
@@ -72,6 +86,25 @@ export function AnimatedText({ children, className = "", delay = 0, staggerDelay
       {characters.map((char, index) => (
         <motion.span
           key={`${char}-${index}`}
+          initial={
+            isMounted && randomOffsets[index]
+              ? {
+                opacity: 0,
+                filter: "blur(20px) brightness(1.5)",
+                scale: 0.3,
+                x: randomOffsets[index].x,
+                y: randomOffsets[index].y,
+                rotate: randomOffsets[index].rotate,
+              }
+              : {
+                opacity: 0,
+                filter: "blur(20px) brightness(1.5)",
+                scale: 0.3,
+                x: 0,
+                y: 0,
+                rotate: 0,
+              }
+          }
           variants={child}
           animate={float}
           style={{
@@ -92,14 +125,21 @@ interface AnimatedLinesProps {
   className?: string
   lineClassName?: string
   delay?: number
+  staggerDelay?: number
 }
 
-export function AnimatedLines({ lines, className = "", lineClassName = "", delay = 0 }: AnimatedLinesProps) {
+export function AnimatedLines({
+  lines,
+  className = "",
+  lineClassName = "",
+  delay = 0,
+  staggerDelay = 0.02,
+}: AnimatedLinesProps) {
   return (
     <div className={className}>
       {lines.map((line, index) => (
         <div key={index} className={lineClassName}>
-          <AnimatedText delay={delay + index * 0.3} staggerDelay={0.02}>
+          <AnimatedText delay={delay + index * 0.3} staggerDelay={staggerDelay}>
             {line}
           </AnimatedText>
         </div>

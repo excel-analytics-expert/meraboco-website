@@ -106,6 +106,11 @@ export default function CommerceClient() {
                   ? "オーダーメイドプランは、セキュリティ保持費用により見積後から毎日料金が加算され、2週間で自動辞退となります。"
                   : "For custom plans, daily fees accrue after an estimate due to security holding costs, and the request is automatically withdrawn after two weeks."}
               </p>
+              <div className="mt-16 pt-8 border-t border-gray-200">
+                <p className="text-sm text-gray-500 text-right">
+                  {isJa ? "最終更新日：2026年1月5日" : "Last updated: Jan 5, 2026"}
+                </p>
+              </div>
             </div>
           </div>
         </section>

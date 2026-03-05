@@ -1,3 +1,4 @@
+// Meraboco. Created by s.kenichi
 import Header from "@/components/header"
 import HeroSlider from "@/components/hero-slider"
 import About from "@/components/about"
@@ -8,6 +9,7 @@ import Footer from "@/components/footer"
 import SEOEnhancer from "@/components/seo-enhancer"
 import ParallaxSection from "@/components/parallax-section"
 import SmartPlanSection from "@/components/smart-plan-section"
+import FreeDiagnostic from "@/components/free-diagnostic"
 import { microcmsClient } from "@/lib/microcms"
 import type { MicroCmsPricingPlan } from "@/types/microcms"
 
@@ -47,6 +49,9 @@ export default async function Home() {
         <SmartPlanSection plans={plans} hasError={plansError} />
         <ParallaxSection speed={0.3}>
           <Works />
+        </ParallaxSection>
+        <ParallaxSection speed={0.2}>
+          <FreeDiagnostic />
         </ParallaxSection>
         <ParallaxSection speed={0.2}>
           <Contact />

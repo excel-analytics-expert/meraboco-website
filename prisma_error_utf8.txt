@@ -1,0 +1,48 @@
+﻿node.exe : Prisma schema loa
+ded from prisma\schema.prism
+a.
+発生場所 C:\Program Files\nodejs
+\npx.ps1:29 文字:3
++   & $NODE_EXE $NPX_CLI_JS 
+$args
++   ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~
+    + CategoryInfo          
+    : NotSpecified: (Prism  
+  a schema l...\schema.pr   
+ isma.:String) [], Remot    
+eException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
+Error: Prisma schema validat
+ion - (get-config wasm)
+Error code: P1012
+error: The datasource proper
+ty `url` is no longer suppor
+ted in schema files. Move co
+nnection URLs for Migrate to
+ `prisma.config.ts` and pass
+ either `adapter` for a dire
+ct database connection or `a
+ccelerateUrl` for Accelerate
+ to the `PrismaClient` const
+ructor. See https://pris.ly/
+d/config-datasource and http
+s://pris.ly/d/prisma7-client
+-config
+  -->  prisma\schema.prisma:
+13
+   | 
+12 |   provider = "postgresq
+l"
+13 |   url      = "postgresq
+l://postgres:postgres@localh
+ost:5432/meraboco?schema=pub
+lic"
+   | 
+
+Validation Error Count: 1
+[Context: getConfig]
+
+Prisma CLI Version : 7.4.1

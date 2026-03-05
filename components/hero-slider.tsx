@@ -83,9 +83,8 @@ export default function HeroSlider() {
       {slides.map((slide, index) => (
         <div
           key={slideIds[index]}
-          className={`hero-slide absolute inset-0 transition-all duration-[1500ms] ease-in-out ${
-            index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
-          }`}
+          className={`hero-slide absolute inset-0 transition-all duration-[1500ms] ease-in-out ${index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105 pointer-events-none"
+            }`}
         >
           <div
             className="absolute inset-0 w-full h-full"
@@ -107,12 +106,12 @@ export default function HeroSlider() {
 
           <div className="hero-slide__content">
             {index === currentSlide && !isTransitioning && (
-              <div className={`hero-slide__title ${slideFonts[index]}`} style={{ perspective: "1000px" }}>
+              <div className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white text-center leading-tight mb-8 tracking-wider text-shadow-glow ${slideFonts[index]}`} style={{ perspective: "1000px" }}>
                 <AnimatedLines lines={slide.title} lineClassName="block" delay={0.3} />
               </div>
             )}
             {index !== currentSlide && (
-              <h2 className={`hero-slide__title ${slideFonts[index]} opacity-0`}>
+              <h2 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white text-center leading-tight mb-8 tracking-wider text-shadow-glow ${slideFonts[index]} opacity-0`}>
                 {slide.title.map((line, i) => (
                   <span key={i} className="block">
                     {line}
@@ -122,11 +121,35 @@ export default function HeroSlider() {
             )}
 
             {index === currentSlide && !isTransitioning && (
-              <div className="hero-slide__text" style={{ perspective: "1000px" }}>
+              <div className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 text-center max-w-[800px] tracking-wide font-light text-shadow-sm" style={{ perspective: "1000px" }}>
                 <AnimatedLines lines={[slide.text]} delay={0.9} staggerDelay={0.02} />
               </div>
             )}
-            {index !== currentSlide && <p className="hero-slide__text opacity-0">{slide.text}</p>}
+            {index !== currentSlide && <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/95 text-center max-w-[800px] tracking-wide font-light text-shadow-sm opacity-0">{slide.text}</p>}
+
+            <div
+              className={`mt-6 sm:mt-8 flex flex-col items-center justify-center transition-all px-4 ${index === currentSlide && !isTransitioning
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-4"
+                }`}
+              style={{
+                transition: "all 0.9s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                transitionDelay: index === currentSlide && !isTransitioning ? "1.2s" : "0s"
+              }}
+            >
+              <p className="text-white text-xs sm:text-sm md:text-base mb-3 sm:mb-4 tracking-wider drop-shadow-md text-center">
+                今のサイトで予約/集客が増えるか無料診断
+              </p>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  document.getElementById("free-diagnostic")?.scrollIntoView({ behavior: "smooth" })
+                }}
+                className="w-full max-w-[280px] sm:max-w-none px-4 sm:px-6 py-3 sm:py-3.5 bg-blue-600 text-white text-sm sm:text-base rounded-full hover:bg-blue-700 hover:shadow-lg transition-all duration-200 font-medium whitespace-nowrap"
+              >
+                無料診断を受ける
+              </button>
+            </div>
           </div>
         </div>
       ))}
@@ -144,11 +167,10 @@ export default function HeroSlider() {
             <button
               key={index}
               onClick={() => goToSlide(index)}
-              className={`h-1.5 rounded-full transition-all duration-700 ease-out ${
-                index === currentSlide
-                  ? "bg-white w-12 shadow-lg shadow-white/50"
-                  : "bg-white/40 w-1.5 hover:bg-white/60 hover:w-8"
-              }`}
+              className={`h-1.5 rounded-full transition-all duration-700 ease-out ${index === currentSlide
+                ? "bg-white w-12 shadow-lg shadow-white/50"
+                : "bg-white/40 w-1.5 hover:bg-white/60 hover:w-8"
+                }`}
               aria-label={`スライド${index + 1}へ`}
             />
           ))}

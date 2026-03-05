@@ -1,0 +1,38 @@
+﻿app/api/webhook/stripe/route.ts(4,24): error TS2307: Cannot find module '@/lib/prisma' or its corresponding type declarations.
+app/api/webhook/stripe/route.ts(65,19): error TS2339: Property 'subscription' does not exist on type 'Invoice'.
+app/demos/hotel/page.tsx(6,10): error TS2305: Module '"@/lib/supabase/server"' has no exported member 'createClient'.
+client-project/app/api/webhook/stripe/route.ts(3,10): error TS2305: Module '"@/lib/supabase/server"' has no exported member 'createClient'.
+client-project/app/api/webhook/stripe/route.ts(4,37): error TS2307: Cannot find module '@/lib/contract-pdf' or its corresponding type declarations.
+client-project/app/api/webhook/stripe/route.ts(5,34): error TS2307: Cannot find module '@/lib/email' or its corresponding type declarations.
+client-project/app/api/webhook/stripe/route.ts(8,5): error TS2322: Type '"2024-12-18.acacia"' is not assignable to type '"2026-01-28.clover"'.
+client-project/app/api/webhook/stripe/route.ts(60,67): error TS2339: Property 'current_period_end' does not exist on type 'Response<Subscription>'.
+client-project/app/api/webhook/stripe/route.ts(123,67): error TS2339: Property 'current_period_end' does not exist on type 'Subscription'.
+client-project/app/dashboard/layout.tsx(1,10): error TS2305: Module '"@/lib/supabase/server"' has no exported member 'createClient'.
+client-project/app/dashboard/news/page.tsx(4,30): error TS2307: Cannot find module '@/lib/supabase/client' or its corresponding type declarations.
+client-project/app/dashboard/page.tsx(4,30): error TS2307: Cannot find module '@/lib/supabase/client' or its corresponding type declarations.
+client-project/app/dashboard/settings/page.tsx(4,30): error TS2307: Cannot find module '@/lib/supabase/client' or its corresponding type declarations.
+client-project/lib/contract-pdf.tsx(1,61): error TS2307: Cannot find module '@react-pdf/renderer' or its corresponding type declarations.
+client-project/lib/contract-pdf.tsx(2,10): error TS2305: Module '"@/lib/supabase/server"' has no exported member 'createClient'.
+client-project/lib/email.ts(2,30): error TS2307: Cannot find module '@/lib/supabase/client' or its corresponding type declarations.
+components/animated-text.tsx(75,11): error TS2322: Type '{ hidden: { opacity: number; filter: string; scale: number; x: () => number; y: () => number; rotate: () => number; }; visible: { opacity: number; filter: string; scale: number; x: number; y: number; rotate: number; transition: { ...; }; }; }' is not assignable to type 'Variants'.
+  Property 'hidden' is incompatible with index signature.
+    Type '{ opacity: number; filter: string; scale: number; x: () => number; y: () => number; rotate: () => number; }' is not assignable to type 'Variant'.
+      Type '{ opacity: number; filter: string; scale: number; x: () => number; y: () => number; rotate: () => number; }' is not assignable to type 'TargetAndTransition'.
+        Type '{ opacity: number; filter: string; scale: number; x: () => number; y: () => number; rotate: () => number; }' is not assignable to type 'Target'.
+          Type '{ opacity: number; filter: string; scale: number; x: () => number; y: () => number; rotate: () => number; }' is not assignable to type 'StyleKeyframesDefinition'.
+            Types of property 'x' are incompatible.
+              Type '() => number' is not assignable to type 'ValueKeyframesDefinition | undefined'.
+components/animated-text.tsx(76,11): error TS2322: Type '{ y: number[]; filter: string[]; transition: { duration: number; repeat: number; ease: string; delay: number; }; }' is not assignable to type 'boolean | TargetAndTransition | VariantLabels | LegacyAnimationControls | undefined'.
+  Type '{ y: number[]; filter: string[]; transition: { duration: number; repeat: number; ease: string; delay: number; }; }' is not assignable to type 'TargetAndTransition'.
+    Type '{ y: number[]; filter: string[]; transition: { duration: number; repeat: number; ease: string; delay: number; }; }' is not assignable to type '{ transition?: Transition<any> | undefined; transitionEnd?: ResolvedValues$1 | undefined; }'.
+      Types of property 'transition' are incompatible.
+        Type '{ duration: number; repeat: number; ease: string; delay: number; }' is not assignable to type 'Transition<any> | undefined'.
+          Type '{ duration: number; repeat: number; ease: string; delay: number; }' is not assignable to type 'TransitionWithValueOverrides<any>'.
+            Type '{ duration: number; repeat: number; ease: string; delay: number; }' is not assignable to type 'ValueAnimationTransition<any>'.
+              Types of property 'ease' are incompatible.
+                Type 'string' is not assignable to type 'Easing | Easing[] | undefined'.
+components/hero-slider.tsx(126,65): error TS2322: Type '{ lines: string[]; delay: number; staggerDelay: number; }' is not assignable to type 'IntrinsicAttributes & AnimatedLinesProps'.
+  Property 'staggerDelay' does not exist on type 'IntrinsicAttributes & AnimatedLinesProps'.
+components/page-breadcrumb.tsx(32,42): error TS7053: Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{ company: string; services: string; works: string; privacy: string; terms: string; plans: string; purchase: string; portal: string; subscribe: string; commerce: string; "web-production": string; ... 8 more ...; pro: string; } | { ...; }'.
+  No index signature with a parameter of type 'string' was found on type '{ company: string; services: string; works: string; privacy: string; terms: string; plans: string; purchase: string; portal: string; subscribe: string; commerce: string; "web-production": string; ... 8 more ...; pro: string; } | { ...; }'.
+next.config.ts(14,3): error TS2353: Object literal may only specify known properties, and 'eslint' does not exist in type 'NextConfig'.

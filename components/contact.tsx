@@ -1,7 +1,7 @@
 "use client"
 
-import type React from "react"
 import { useState, useEffect, useRef, type FormEvent } from "react"
+import { motion } from "framer-motion"
 import { useLanguage } from "@/contexts/language-context"
 
 export default function Contact() {
@@ -16,6 +16,9 @@ export default function Contact() {
     name: "",
     email: "",
     company: "",
+    purpose: "",
+    referenceUrl: "",
+    budget: "",
     message: "",
   })
   const [formMessage, setFormMessage] = useState("")
@@ -59,7 +62,15 @@ export default function Contact() {
       if (response.ok) {
         setFormStatus("success")
         setFormMessage(contactData.form.success)
-        setFormData({ name: "", email: "", company: "", message: "" })
+        setFormData({
+          name: "",
+          email: "",
+          company: "",
+          purpose: "",
+          referenceUrl: "",
+          budget: "",
+          message: "",
+        })
 
         // Clear success message after 5 seconds
         setTimeout(() => {
@@ -89,7 +100,7 @@ export default function Contact() {
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -225,6 +236,72 @@ export default function Contact() {
                     disabled={formStatus === "sending"}
                   />
                 </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="group">
+                    <label
+                      htmlFor="purpose"
+                      className="block text-sm font-medium mb-3 text-white/80 transition-colors duration-300 group-focus-within:text-blue-300"
+                    >
+                      {contactData.form.purpose}
+                      <span className="text-red-500 ml-1">*</span>
+                    </label>
+                    <select
+                      id="purpose"
+                      name="purpose"
+                      value={formData.purpose}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-6 py-4 border border-white/20 rounded-2xl bg-white/10 text-white outline-none transition-all duration-300 hover:border-white/40 focus:ring-2 focus:ring-blue-400/60 focus:border-blue-400/60 appearance-none"
+                    >
+                      <option value="" className="bg-slate-900 text-white/50">{language === "ja" ? "選択してください" : "Select an option"}</option>
+                      {contactData.form.purposeOptions.map((opt: string) => (
+                        <option key={opt} value={opt} className="bg-slate-900 text-white">{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="group">
+                    <label
+                      htmlFor="budget"
+                      className="block text-sm font-medium mb-3 text-white/80 transition-colors duration-300 group-focus-within:text-blue-300"
+                    >
+                      {contactData.form.budget}
+                      <span className="text-red-500 ml-1">*</span>
+                    </label>
+                    <select
+                      id="budget"
+                      name="budget"
+                      value={formData.budget}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-6 py-4 border border-white/20 rounded-2xl bg-white/10 text-white outline-none transition-all duration-300 hover:border-white/40 focus:ring-2 focus:ring-blue-400/60 focus:border-blue-400/60 appearance-none"
+                    >
+                      <option value="" className="bg-slate-900 text-white/50">{language === "ja" ? "選択してください" : "Select an option"}</option>
+                      {contactData.form.budgetOptions.map((opt: string) => (
+                        <option key={opt} value={opt} className="bg-slate-900 text-white">{opt}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="group">
+                  <label
+                    htmlFor="referenceUrl"
+                    className="block text-sm font-medium mb-3 text-white/80 transition-colors duration-300 group-focus-within:text-blue-300"
+                  >
+                    {contactData.form.referenceUrl}
+                  </label>
+                  <input
+                    type="url"
+                    id="referenceUrl"
+                    name="referenceUrl"
+                    value={formData.referenceUrl}
+                    onChange={handleChange}
+                    placeholder={contactData.form.referenceUrlPlaceholder}
+                    className="w-full px-6 py-4 border border-white/20 rounded-2xl bg-white/10 text-white placeholder-white/50 outline-none transition-all duration-300 hover:border-white/40 focus:ring-2 focus:ring-blue-400/60 focus:border-blue-400/60"
+                    disabled={formStatus === "sending"}
+                  />
+                </div>
+
                 <div className="group">
                   <label
                     htmlFor="message"
@@ -248,9 +325,10 @@ export default function Contact() {
                   />
                 </div>
                 <div className="text-center pt-4">
-                  <button
+                  <motion.button
                     type="submit"
                     disabled={formStatus === "sending"}
+                    whileTap={{ scale: 0.96 }}
                     className="w-full px-12 py-5 rounded-full bg-white/20 text-white border border-white/20 hover:bg-blue-600 transition-all duration-700 font-bold text-lg disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-blue-500/20"
                   >
                     {formStatus === "sending" ? (
@@ -264,7 +342,7 @@ export default function Contact() {
                     ) : (
                       contactData.form.submit
                     )}
-                  </button>
+                  </motion.button>
                 </div>
               </form>
             </div>
